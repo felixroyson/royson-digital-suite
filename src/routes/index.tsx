@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { createPortal } from "react-dom";
 import React, { useEffect, useRef, useState } from "react";
 import {
   motion,
@@ -18,6 +19,7 @@ import {
   Download,
   ArrowDown,
   MapPin,
+  ShieldCheck,
 } from "lucide-react";
 import portrait from "@/assets/hero-portrait.png";
 console.log("Portrait URL:", portrait);
@@ -70,17 +72,8 @@ const NAV_LINKS = [
 
 /* -------------------- NAV -------------------- */
 
-function Nav() {
-  const { mode, toggleMode, accent, setAccent } = useTheme();
-  const [active, setActive] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState(ids[0] || "home");
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -91,11 +84,24 @@ function Nav() {
       },
       { rootMargin: "-40% 0px -55% 0px" },
     );
-    NAV_LINKS.forEach((l) => {
-      const el = document.getElementById(l.id);
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
       if (el) io.observe(el);
     });
     return () => io.disconnect();
+  }, [ids]);
+
+  return active;
+}
+
+function Header() {
+  const active = useActiveSection(NAV_LINKS.map((l) => l.id));
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -117,15 +123,217 @@ function Nav() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <PokemonThemeSwitcher activeNavId={active} />
+      </div>
+    </header>
+  );
+}
+
+/* -------------------- POKÉMON THEME SWITCHER & COMPANIONS -------------------- */
+
+type PokeType = {
+  key: Accent;
+  label: string;
+  pokemon: string;
+  id: number;
+  hex: string;
+  sprite: string;
+  ability: string;
+};
+
+const POKE_TYPES: PokeType[] = [
+  {
+    key: "orange",
+    label: "Fire",
+    pokemon: "Charizard",
+    id: 6,
+    hex: "#ff6a2b",
+    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/firered-leafgreen/6.png",
+    ability: "Firewall Shield",
+  },
+  {
+    key: "green",
+    label: "Grass",
+    pokemon: "Bulbasaur",
+    id: 1,
+    hex: "#22c96b",
+    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/firered-leafgreen/1.png",
+    ability: "Encryption Vines",
+  },
+  {
+    key: "blue",
+    label: "Water",
+    pokemon: "Greninja",
+    id: 658,
+    hex: "#3aa2ff",
+    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/658.png",
+    ability: "Water Shuriken Security",
+  },
+  {
+    key: "purple",
+    label: "Ghost",
+    pokemon: "Gengar",
+    id: 94,
+    hex: "#8a5cf6",
+    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/firered-leafgreen/94.png",
+    ability: "Shadow Audit",
+  },
+  {
+    key: "gold",
+    label: "Electric",
+    pokemon: "Pikachu",
+    id: 25,
+    hex: "#f5d020",
+    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/firered-leafgreen/25.png",
+    ability: "Thunderbolt SOC",
+  },
+  {
+    key: "pink",
+    label: "Psychic",
+    pokemon: "Mewtwo",
+    id: 150,
+    hex: "#ec4899",
+    sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/firered-leafgreen/150.png",
+    ability: "Psystrike Intel",
+  },
+];
+
+function FireRedPokeball({ size = 48, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`filter drop-shadow-[0_6px_16px_rgba(0,0,0,0.65)] ${className}`}
+    >
+      <defs>
+        <radialGradient id="frRedGrad" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#ff3b3b" />
+          <stop offset="45%" stopColor="#e11d48" />
+          <stop offset="85%" stopColor="#881337" />
+          <stop offset="100%" stopColor="#4c0519" />
+        </radialGradient>
+
+        <radialGradient id="frWhiteGrad" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="55%" stopColor="#f1f5f9" />
+          <stop offset="85%" stopColor="#cbd5e1" />
+          <stop offset="100%" stopColor="#64748b" />
+        </radialGradient>
+      </defs>
+
+      <circle cx="50" cy="50" r="48" fill="#000000" />
+
+      <g transform="rotate(-32 50 50)">
+        <path d="M 4 50 A 46 46 0 0 1 96 50 Z" fill="url(#frRedGrad)" />
+
+        <path d="M 4 50 A 46 46 0 0 0 96 50 Z" fill="url(#frWhiteGrad)" />
+
+        <ellipse cx="26" cy="24" rx="14" ry="7.5" fill="#ffffff" fillOpacity="0.75" transform="rotate(-15 26 24)" />
+        <circle cx="16" cy="32" r="2.8" fill="#ffffff" fillOpacity="0.85" />
+
+        <rect x="4" y="44" width="92" height="12" fill="#090d16" />
+
+        <circle cx="50" cy="50" r="16.5" fill="#090d16" stroke="#000000" strokeWidth="2.5" />
+
+        <circle cx="50" cy="50" r="12" fill="#1e293b" />
+
+        <circle cx="50" cy="50" r="8" fill="#ffffff" stroke="#090d16" strokeWidth="1.5" />
+        <circle cx="47" cy="47" r="2.5" fill="#ffffff" />
+      </g>
+    </svg>
+  );
+}
+
+const Real3DPokeball = FireRedPokeball;
+
+function PokeballIcon({ size = 18, color = "currentColor" }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="8.5" stroke={color} strokeWidth="1.5" />
+      <path d="M3.5 12H9.5M14.5 12H20.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="12" r="2.8" stroke={color} strokeWidth="1.5" fill="none" />
+      <circle cx="12" cy="12" r="1.2" fill={color} />
+    </svg>
+  );
+}
+
+
+
+type BattleEffect = {
+  pokemon: string;
+  label: string;
+  hex: string;
+  sprite: string;
+} | null;
+
+function PokemonThemeSwitcher({ activeNavId }: { activeNavId: string }) {
+  const { mode, toggleMode, accent, setAccent } = useTheme();
+  const [battleEffect, setBattleEffect] = useState<BattleEffect>(null);
+
+  const isDark = mode === "dark";
+  const modePokemon = isDark ? "Lunala" : "Solgaleo";
+  const modeSprite = isDark
+    ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/792.png"
+    : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/791.png";
+  const modeHex = isDark ? "#c9d2ff" : "#f5d020";
+
+  const triggerBattle = (poke: { pokemon: string; label: string; hex: string; sprite: string }) => {
+    setBattleEffect(poke);
+    setTimeout(() => {
+      setBattleEffect(null);
+    }, 2800);
+  };
+
+  const handleToggleMode = () => {
+    toggleMode();
+    const nextIsDark = mode === "dark"; 
+    triggerBattle({
+      pokemon: nextIsDark ? "Solgaleo" : "Lunala",
+      label: nextIsDark ? "Sun" : "Moon",
+      hex: nextIsDark ? "#f5d020" : "#c9d2ff",
+      sprite: nextIsDark
+        ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/791.png"
+        : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/792.png",
+    });
+  };
+
+  const handleAccentChange = (t: (typeof POKE_TYPES)[0]) => {
+    setAccent(t.key);
+    triggerBattle({
+      pokemon: t.pokemon,
+      label: t.label,
+      hex: t.hex,
+      sprite: t.sprite,
+    });
+  };
+
+  return (
+    <>
+      <div className="flex items-center gap-6">
+        <nav className="hidden items-center gap-2 md:flex">
+          <PokeButton
+            label={isDark ? "Moon (Lunala)" : "Sun (Solgaleo)"}
+            pokemon={modePokemon}
+            sprite={modeSprite}
+            hex={modeHex}
+            active={true}
+            onClick={handleToggleMode}
+            isThemeToggle
+          >
+            {isDark ? <PokeMoonIcon size={18} /> : <PokeSunIcon size={18} />}
+          </PokeButton>
+
           {NAV_LINKS.map((l) => (
             <a
               key={l.id}
               href={`#${l.id}`}
               className="group relative px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
             >
-              <span className={active === l.id ? "text-foreground" : ""}>{l.label}</span>
-              {active === l.id && (
+              <span className={activeNavId === l.id ? "text-foreground" : ""}>{l.label}</span>
+              {activeNavId === l.id && (
                 <motion.span
                   layoutId="nav-dot"
                   className="absolute left-1/2 -bottom-0.5 h-1 w-1 -translate-x-1/2 rounded-full"
@@ -136,72 +344,197 @@ function Nav() {
           ))}
         </nav>
 
-        <PokemonThemeSwitcher />
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {POKE_TYPES.map((t) => {
+            const active = accent === t.key;
+            return (
+              <PokeButton
+                key={t.key}
+                label={t.label}
+                pokemon={t.pokemon}
+                sprite={t.sprite}
+                hex={t.hex}
+                active={active}
+                onClick={() => handleAccentChange(t)}
+              />
+            );
+          })}
+        </div>
       </div>
-    </header>
+
+      <PokemonBattleOverlay
+        battleEffect={battleEffect}
+        onClose={() => setBattleEffect(null)}
+      />
+    </>
   );
 }
 
-/* -------------------- POKÉMON THEME SWITCHER -------------------- */
+function PokemonBattleOverlay({
+  battleEffect,
+  onClose,
+}: {
+  battleEffect: BattleEffect;
+  onClose: () => void;
+}) {
+  if (!battleEffect || typeof document === "undefined") return null;
 
-type PokeType = {
-  key: Accent;
-  label: string;
-  hex: string;
-  Icon: (p: { size?: number }) => React.ReactElement;
-};
+  return createPortal(
+    <div className="pointer-events-none fixed inset-0 z-[999999] flex items-center justify-center overflow-hidden font-mono bg-background/85 backdrop-blur-xl">
+      {/* Background Cyber Matrix Grid */}
+      <div className="absolute inset-0 grid-bg opacity-40" />
 
-const POKE_TYPES: PokeType[] = [
-  { key: "orange", label: "Fire", hex: "#ff6a2b", Icon: FireIcon },
-  { key: "green", label: "Grass", hex: "#22c96b", Icon: GrassIcon },
-  { key: "blue", label: "Water", hex: "#3aa2ff", Icon: WaterIcon },
-  { key: "purple", label: "Dark", hex: "#8a5cf6", Icon: DarkIcon },
-  { key: "gold", label: "Electric", hex: "#f5d020", Icon: ElectricIcon },
-];
+      {/* Cyber HUD Ambient Flash */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.8, 0.3, 0] }}
+        transition={{ duration: 2.4, times: [0, 0.3, 0.7, 1] }}
+        className="absolute inset-0 z-10"
+        style={{
+          background: `radial-gradient(circle at 50% 45%, ${battleEffect.hex}cc 0%, ${battleEffect.hex}44 45%, transparent 80%)`,
+        }}
+      />
 
-function PokemonThemeSwitcher() {
-  const { mode, toggleMode, accent, setAccent } = useTheme();
-  return (
-    <div className="flex items-center gap-1.5 sm:gap-2">
-      <PokeButton
-        label={mode === "dark" ? "Moon" : "Sun"}
-        hex={mode === "dark" ? "#c9d2ff" : "#f5d020"}
-        active={false}
-        onClick={toggleMode}
+      {/* ================= CYBERSECURITY HUD CUT-IN STRIPE ================= */}
+      <motion.div
+        initial={{ x: "-100%" }}
+        animate={{ x: ["-100%", "0%", "0%", "100%"] }}
+        transition={{ duration: 1.35, times: [0, 0.25, 0.75, 1], ease: "easeInOut" }}
+        className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-30 flex h-36 items-center border-y-2 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.9)] overflow-hidden"
+        style={{
+          borderColor: battleEffect.hex,
+          background: `linear-gradient(90deg, #090d16 0%, color-mix(in oklab, ${battleEffect.hex} 35%, #090d16) 35%, color-mix(in oklab, ${battleEffect.hex} 50%, #090d16) 65%, #090d16 100%)`,
+        }}
       >
-        {mode === "dark" ? <PokeMoonIcon size={18} /> : <PokeSunIcon size={18} />}
-      </PokeButton>
-      {POKE_TYPES.map((t) => {
-        const active = accent === t.key;
-        const Icon = t.Icon;
-        return (
-          <PokeButton
-            key={t.key}
-            label={t.label}
-            hex={t.hex}
-            active={active}
-            onClick={() => setAccent(t.key)}
-          >
-            <Icon size={18} />
-          </PokeButton>
-        );
-      })}
-    </div>
+        {/* Animated Cyber Grid Lines */}
+        <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(90deg,transparent,transparent_16px,#ffffff_16px,#ffffff_17px)] animate-marquee-slow" />
+        <div className="absolute inset-0 opacity-25 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.8)_51%)] bg-[length:100%_4px]" />
+
+        <div className="relative mx-auto flex w-full max-w-[1400px] items-center justify-between px-10">
+          {/* Left: Security Researcher Avatar Badge */}
+          <div className="flex items-center gap-6">
+            {/* Cyber Shield Badge */}
+            <div
+              className="relative flex h-20 w-20 items-center justify-center rounded-xl border-2 bg-surface-1 shadow-[0_0_20px_rgba(0,0,0,0.8)] overflow-hidden"
+              style={{ borderColor: battleEffect.hex }}
+            >
+              <div className="absolute inset-0 bg-grid-white/10" />
+              <ShieldCheck size={38} style={{ color: battleEffect.hex }} className="animate-pulse" />
+              <span
+                className="absolute bottom-1 font-mono text-[9px] font-black uppercase tracking-widest px-1 rounded"
+                style={{ background: battleEffect.hex, color: "#000000" }}
+              >
+                SOC-X
+              </span>
+            </div>
+
+            {/* Cyber HUD Text Info */}
+            <div className="flex flex-col">
+              <span className="font-display text-3xl font-black uppercase tracking-wider text-foreground drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] md:text-4xl">
+                <span style={{ color: battleEffect.hex }}>{battleEffect.pokemon.toUpperCase()}</span>! I CHOOSE YOU!
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Cyber HUD Lock-on Target & Spinning 3D Pokeball */}
+          <div className="relative flex items-center justify-center">
+            <div
+              className="absolute h-20 w-20 rounded-full border border-dashed animate-spin-slow"
+              style={{ borderColor: `${battleEffect.hex}88` }}
+            />
+            <Real3DPokeball size={44} className="animate-spin" />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* 1. Real 3D Pokéball Throw Arc */}
+      <motion.div
+        initial={{ x: "-30vw", y: "20vh", rotate: 0, scale: 0.6, opacity: 0 }}
+        animate={{
+          x: ["-30vw", "0vw"],
+          y: ["20vh", "-10vh", "0vh"],
+          rotate: [0, 720, 1080],
+          scale: [0.6, 1.8, 1],
+          opacity: [0, 1, 1, 0],
+        }}
+        transition={{ delay: 0.6, duration: 0.6, times: [0, 0.2, 0.85, 1], ease: "easeOut" }}
+        className="absolute z-50 flex h-20 w-20 items-center justify-center"
+      >
+        <Real3DPokeball size={64} />
+      </motion.div>
+
+      {/* 2. Open Pokéball Flash Explosion at Center */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: [0, 2.8, 0], opacity: [0, 1, 0] }}
+        transition={{ delay: 1.15, duration: 0.5 }}
+        className="absolute z-50 h-44 w-44 rounded-full"
+        style={{
+          background: `radial-gradient(circle, #ffffff 0%, ${battleEffect.hex} 65%, transparent 100%)`,
+          boxShadow: `0 0 120px ${battleEffect.hex}`,
+        }}
+      />
+
+      {/* 3. Emerging Pokémon Sprite in Center Section */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0, y: 40 }}
+        animate={{ scale: [0, 1.6, 1.3], opacity: [0, 1, 1, 0], y: [40, -16, 0] }}
+        transition={{ delay: 1.2, duration: 1.45, times: [0, 0.35, 0.75, 1] }}
+        className="relative z-50 flex flex-col items-center justify-center"
+      >
+        <img
+          src={battleEffect.sprite}
+          alt={battleEffect.pokemon}
+          className="h-44 w-44 object-contain image-rendering-pixelated filter drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
+        />
+        {/* Shockwave Ring */}
+        <motion.div
+          initial={{ scale: 0.2, opacity: 1 }}
+          animate={{ scale: 2.8, opacity: 0 }}
+          transition={{ delay: 1.25, duration: 0.75 }}
+          className="absolute h-52 w-52 rounded-full border-4"
+          style={{ borderColor: battleEffect.hex }}
+        />
+      </motion.div>
+
+      {/* 4. GBA Battle Status Message Banner */}
+      <motion.div
+        initial={{ y: 90, opacity: 0 }}
+        animate={{ y: [90, 0, 0, 90], opacity: [0, 1, 1, 0] }}
+        transition={{ delay: 1.1, duration: 1.5, times: [0, 0.25, 0.8, 1] }}
+        className="absolute bottom-8 z-[105] flex items-center gap-4 rounded-xl border-4 bg-background/95 px-8 py-4 shadow-[8px_8px_0px_rgba(0,0,0,0.85)] backdrop-blur-2xl font-mono"
+        style={{ borderColor: battleEffect.hex }}
+      >
+        <Real3DPokeball size={36} />
+        <div className="flex flex-col">
+          <span className="font-mono text-lg font-extrabold uppercase tracking-wider text-foreground">
+            <span style={{ color: battleEffect.hex }}>{battleEffect.pokemon.toUpperCase()}</span>! I CHOOSE YOU!
+          </span>
+        </div>
+      </motion.div>
+    </div>,
+    document.body
   );
 }
 
 function PokeButton({
-  children,
   hex,
   active,
   label,
+  pokemon,
+  sprite,
   onClick,
+  isThemeToggle = false,
+  children,
 }: {
-  children: React.ReactNode;
   hex: string;
   active: boolean;
   label: string;
+  pokemon?: string;
+  sprite?: string;
   onClick: () => void;
+  isThemeToggle?: boolean;
+  children?: React.ReactNode;
 }) {
   const ref = useRef<HTMLButtonElement>(null);
   const [hover, setHover] = useState(false);
@@ -213,14 +546,60 @@ function PokeButton({
     const r = el.getBoundingClientRect();
     const x = e.clientX - (r.left + r.width / 2);
     const y = e.clientY - (r.top + r.height / 2);
-    el.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
   };
   const onLeave = () => {
     setHover(false);
     if (ref.current) ref.current.style.transform = "";
   };
 
-  const ambient = `radial-gradient(circle at 50% 50%, ${hex}55, transparent 70%)`;
+  const ambient = `radial-gradient(circle at 50% 50%, ${hex}66, transparent 75%)`;
+  const isRevealed = active || hover;
+
+  if (isThemeToggle) {
+    return (
+      <div className="relative">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -inset-2 rounded-full transition-opacity duration-500"
+          style={{ background: ambient, opacity: hover ? 0.8 : 0.45, filter: "blur(6px)" }}
+        />
+        <button
+          ref={ref}
+          aria-label={label}
+          onClick={onClick}
+          onMouseMove={onMove}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={onLeave}
+          className="relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-300 overflow-hidden"
+          style={{
+            borderColor: hover ? hex : `${hex}99`,
+            background: `radial-gradient(circle at 50% 40%, ${hex}28, color-mix(in oklab, var(--background) 65%, transparent))`,
+            boxShadow: hover
+              ? `inset 0 0 10px ${hex}44, 0 4px 14px -6px ${hex}66`
+              : `inset 0 0 6px ${hex}22`,
+            color: "var(--foreground)",
+          }}
+          title={label}
+        >
+          {sprite ? (
+            <div className="flex h-full w-full items-center justify-center p-0.5">
+              <motion.img
+                key={pokemon}
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                src={sprite}
+                alt={pokemon}
+                className="max-h-8 max-w-8 object-contain object-center filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] image-rendering-pixelated"
+              />
+            </div>
+          ) : (
+            children
+          )}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="relative">
@@ -230,7 +609,7 @@ function PokeButton({
         className="pointer-events-none absolute -inset-2 rounded-full transition-opacity duration-500"
         style={{
           background: ambient,
-          opacity: active ? 0.9 : hover ? 0.7 : 0.25,
+          opacity: isRevealed ? 0.85 : 0.25,
           filter: "blur(8px)",
         }}
       />
@@ -242,61 +621,170 @@ function PokeButton({
           style={{ boxShadow: `0 0 0 2px ${hex}` }}
         />
       )}
+
       <button
         ref={ref}
-        aria-label={label}
+        aria-label={`${pokemon || label} Theme`}
         aria-pressed={active}
         onClick={onClick}
         onMouseMove={onMove}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={onLeave}
-        className={`relative grid h-10 w-10 place-items-center rounded-full border backdrop-blur-md transition-[transform,box-shadow,border-color,background] duration-[400ms] ease-out ${
+        className={`relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-300 ease-out overflow-hidden ${
           active ? "animate-poke-breath" : ""
         }`}
         style={{
-          borderColor: active ? hex : "color-mix(in oklab, var(--foreground) 14%, transparent)",
+          borderColor: active ? hex : hover ? `${hex}aa` : "color-mix(in oklab, var(--foreground) 14%, transparent)",
           background: active
-            ? `radial-gradient(circle at 50% 40%, ${hex}33, color-mix(in oklab, var(--background) 70%, transparent))`
-            : "color-mix(in oklab, var(--background) 55%, transparent)",
-          boxShadow: active
-            ? `inset 0 0 12px ${hex}55, 0 6px 24px -6px ${hex}80, 0 0 0 1px ${hex}44`
+            ? `radial-gradient(circle at 50% 40%, ${hex}33, color-mix(in oklab, var(--background) 75%, transparent))`
             : hover
-              ? `inset 0 0 10px ${hex}33, 0 4px 18px -6px ${hex}55`
+              ? `radial-gradient(circle at 50% 40%, ${hex}22, color-mix(in oklab, var(--background) 65%, transparent))`
+              : "color-mix(in oklab, var(--background) 55%, transparent)",
+          boxShadow: active
+            ? `inset 0 0 12px ${hex}55, 0 6px 20px -6px ${hex}80`
+            : hover
+              ? `inset 0 0 10px ${hex}33, 0 4px 14px -6px ${hex}55`
               : `inset 0 0 6px ${hex}18`,
-          color: active ? hex : "var(--foreground)",
+          color: isRevealed ? hex : "var(--foreground)",
         }}
       >
-        <span
-          className="relative z-10 transition-transform duration-300"
-          style={{
-            transform: active ? "scale(1.08)" : hover ? "scale(1.04)" : "scale(1)",
-            filter: active ? `drop-shadow(0 0 6px ${hex})` : "none",
-            color: active ? hex : "currentColor",
-          }}
-        >
-          {children}
-        </span>
-        {/* particles */}
-        {(active || hover) && (
-          <>
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 h-1 w-1 rounded-full animate-[poke-float_2.2s_ease-out_infinite]"
-                style={{
-                  background: hex,
-                  boxShadow: `0 0 6px ${hex}`,
-                  animationDelay: `${i * 0.5}s`,
-                  ["--tx" as string]: `${(i - 1) * 8}px`,
-                  ["--ty" as string]: `${-14 - i * 3}px`,
-                }}
-              />
-            ))}
-          </>
+        {isRevealed && sprite && pokemon ? (
+          <div className="flex h-full w-full items-center justify-center p-1">
+            <motion.img
+              key={pokemon}
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              src={sprite}
+              alt={pokemon}
+              className="max-h-7 max-w-7 object-contain object-center filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] image-rendering-pixelated"
+            />
+          </div>
+        ) : (
+          <PokeballIcon size={18} color={hex} />
         )}
       </button>
     </div>
+  );
+}
+
+function PokemonCompanionWidget() {
+  const { accent, setAccent } = useTheme();
+  const [collapsed, setCollapsed] = useState(false);
+  const [cheering, setCheering] = useState(false);
+
+  const activePoke = POKE_TYPES.find((t) => t.key === accent) || POKE_TYPES[0];
+
+  const handleSparkle = () => {
+    setCheering(true);
+    setTimeout(() => setCheering(false), 1200);
+  };
+
+  return (
+    <aside aria-label="Pokémon Security Partner" className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2 font-mono">
+      <AnimatePresence>
+        {!collapsed && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.85, y: 16 }}
+            className="relative flex items-center gap-3.5 rounded-lg border-2 bg-background/95 p-3 shadow-[6px_6px_0px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all"
+            style={{
+              borderColor: activePoke.hex,
+            }}
+          >
+            {/* GBA Vintage Pixel Sprite Button */}
+            <button
+              onClick={handleSparkle}
+              title={`Click ${activePoke.pokemon} to cheer!`}
+              className="relative group flex h-14 w-14 items-center justify-center rounded border bg-surface-1/80 p-1 transition-transform hover:scale-105 active:scale-95"
+              style={{ borderColor: `${activePoke.hex}88` }}
+            >
+              <motion.img
+                key={activePoke.key}
+                src={activePoke.sprite}
+                alt={activePoke.pokemon}
+                animate={cheering ? { y: [-6, 0, -6], rotate: [0, -8, 8, 0] } : { y: [0, -2, 0] }}
+                transition={{ duration: cheering ? 0.35 : 1.8, repeat: cheering ? 3 : Infinity }}
+                className="h-12 w-12 object-contain image-rendering-pixelated filter drop-shadow-[2px_2px_0px_rgba(0,0,0,0.7)]"
+              />
+              <span
+                className="absolute -top-1.5 -right-1.5 flex h-4.5 w-4.5 items-center justify-center rounded text-[9px] font-bold text-background shadow"
+                style={{ background: activePoke.hex }}
+              >
+                ★
+              </span>
+            </button>
+
+            {/* FireRed GBA Status Box */}
+            <div className="flex flex-col pr-1 min-w-[150px]">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-mono text-xs font-extrabold uppercase tracking-wider text-foreground">
+                  {activePoke.pokemon}
+                </span>
+                <span className="font-mono text-[10px] font-bold text-emerald-400">
+                  :L100
+                </span>
+              </div>
+
+              {/* GBA HP Bar */}
+              <div className="mt-1 flex items-center gap-1.5">
+                <span className="font-mono text-[9px] font-bold text-muted-foreground">HP</span>
+                <div className="h-2 flex-1 rounded-sm border border-foreground/30 bg-muted/60 p-0.5">
+                  <div className="h-full w-full rounded-xs bg-emerald-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]" />
+                </div>
+              </div>
+
+              <span className="font-mono text-[9.5px] text-muted-foreground mt-1 tracking-tight">
+                {activePoke.ability}
+              </span>
+
+              {/* Pokéball Switcher */}
+              <div className="mt-2 flex items-center gap-1.5">
+                {POKE_TYPES.map((t) => (
+                  <button
+                    key={t.key}
+                    onClick={() => setAccent(t.key)}
+                    title={`Switch partner to ${t.pokemon} (${t.label})`}
+                    className={`h-3 w-3 rounded-full transition-all ${
+                      accent === t.key ? "scale-125 ring-2 ring-foreground" : "opacity-40 hover:opacity-100"
+                    }`}
+                    style={{ background: t.hex }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Minimize button */}
+            <button
+              onClick={() => setCollapsed(true)}
+              className="ml-0.5 text-muted-foreground transition-colors hover:text-foreground p-1 text-xs"
+              title="Minimize GBA Companion"
+            >
+              ✕
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Toggle Icon when collapsed */}
+      {collapsed && (
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          onClick={() => setCollapsed(false)}
+          className="group flex h-12 w-12 items-center justify-center rounded-lg border-2 bg-background/95 shadow-[4px_4px_0px_rgba(0,0,0,0.6)] transition-transform hover:scale-110"
+          style={{ borderColor: activePoke.hex }}
+          title={`Summon ${activePoke.pokemon}`}
+        >
+          <img
+            src={activePoke.sprite}
+            alt={activePoke.pokemon}
+            className="h-9 w-9 object-contain image-rendering-pixelated filter drop-shadow-[2px_2px_0px_rgba(0,0,0,0.6)]"
+          />
+        </motion.button>
+      )}
+    </aside>
   );
 }
 
@@ -339,6 +827,24 @@ function ElectricIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" strokeLinejoin="round">
       <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor" opacity="0.95"/>
+    </svg>
+  );
+}
+function PsychicIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="7" />
+      <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+      <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+    </svg>
+  );
+}
+function DragonIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 18C4 16 3 13 4 10C5 7 8 5 12 5C16 5 19 7 20 10C21 13 20 16 18 18" />
+      <path d="M12 5V21" />
+      <path d="M8 12L12 8L16 12" />
     </svg>
   );
 }
@@ -385,7 +891,7 @@ function SocialRail() {
     { icon: Mail, href: CONTACT.gmail, label: "Email" },
   ];
   return (
-    <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-6 lg:flex">
+    <div className="fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-5 2xl:flex">
       {items.map((it) => (
         <a
           key={it.label}
@@ -393,12 +899,12 @@ function SocialRail() {
           target="_blank"
           rel="noreferrer"
           aria-label={it.label}
-          className="group text-muted-foreground transition-colors hover:text-accent"
+          className="group rounded-lg p-2 text-muted-foreground transition-all hover:bg-accent/10 hover:text-accent hover:scale-110"
         >
-          <it.icon size={16} strokeWidth={1.5} />
+          <it.icon size={18} strokeWidth={1.5} />
         </a>
       ))}
-      <div className="mt-2 h-24 w-px bg-border" />
+      <div className="mt-2 h-20 w-px bg-border" />
     </div>
   );
 }
@@ -463,16 +969,16 @@ function Hero() {
     <section
       id="home"
       ref={ref}
-      className="relative min-h-screen overflow-hidden pt-24"
+      className="relative flex min-h-screen flex-col justify-between overflow-hidden pt-24 pb-20 max-w-full"
       style={{ perspective: "1400px" }}
     >
       <CyberBackdrop />
 
       <motion.div
         style={{ y, rotateX, scale, opacity, transformStyle: "preserve-3d", transformOrigin: "50% 100%" }}
-        className="relative mx-auto grid max-w-[1600px] grid-cols-1 gap-10 px-6 pt-8 md:px-10 lg:grid-cols-[1.15fr_1fr] lg:pt-16"
+        className="relative mx-auto grid max-w-[1600px] grid-cols-1 gap-10 px-6 pt-8 md:px-10 lg:px-12 2xl:pl-28 2xl:pr-12 lg:grid-cols-[1.15fr_1fr] lg:pt-12 overflow-hidden"
       >
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center min-w-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -483,7 +989,7 @@ function Hero() {
             <span className="text-accent">I'm Felix Royson</span>
           </motion.div>
 
-          <h1 className="font-display text-[13vw] leading-[0.92] font-bold tracking-[-0.04em] md:text-[8.2vw] lg:text-[7vw]">
+          <h1 className="font-display text-[12vw] leading-[0.92] font-bold tracking-[-0.04em] md:text-[7.5vw] lg:text-[5.2vw] xl:text-[5.5vw] 2xl:text-[6vw] max-w-full overflow-hidden break-words">
             <SplitLine delay={0.1}>CYBERSECURITY</SplitLine>
             <br />
             <SplitLine delay={0.25}>ENGINEER.</SplitLine>
@@ -499,14 +1005,14 @@ function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.6 }}
-            className="mt-10 grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end"
+            className="mt-8 flex flex-col gap-6"
           >
-            <p className="max-w-md text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
               M.Tech CSE student specialising in cybersecurity — building SOC
               dashboards, pentest platforms, and Android security frameworks.
               Currently exploring cloud and network security.
             </p>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-5 pt-1">
               <MagneticButton>
                 <a
                   href="#work"
@@ -538,7 +1044,7 @@ function Hero() {
         </div>
       </motion.div>
 
-      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+      <div className="pointer-events-none select-none relative bottom-4 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
         <span>Scroll</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
@@ -757,7 +1263,7 @@ function Scroll3DSection({
     <section
       id={id}
       ref={ref}
-      className={`relative px-6 py-32 md:px-10 ${className ?? ""}`}
+      className={`relative px-6 py-32 md:px-10 lg:pl-24 lg:pr-12 ${className ?? ""}`}
       style={{ perspective: "1600px" }}
     >
       <motion.div
@@ -1030,7 +1536,7 @@ const RESEARCH = [
 
 const ONGOING = [
   {
-    name: "Guardian Companion",
+    name: "A.E.G.I.E.S",
     status: "Ongoing",
     desc: "A personal safety and monitoring companion app — real-time alerts, trusted contact escalation, and privacy-first location signals designed for high-risk everyday scenarios.",
   },
@@ -1739,15 +2245,146 @@ function TechStack() {
 }
 
 
+/* -------------------- CYBER PENTEST MOUSE TRAIL -------------------- */
+
+type TrailParticle = {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  type: "dot" | "plus" | "ring";
+  angle: number;
+};
+
+type ClickRipple = {
+  id: number;
+  x: number;
+  y: number;
+};
+
+function CyberMouseTrail() {
+  const [particles, setParticles] = useState<TrailParticle[]>([]);
+  const [ripples, setRipples] = useState<ClickRipple[]>([]);
+  const lastTime = useRef(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const now = Date.now();
+      if (now - lastTime.current < 35) return;
+      lastTime.current = now;
+
+      const types: ("dot" | "plus" | "ring")[] = ["dot", "dot", "plus", "ring"];
+      const type = types[Math.floor(Math.random() * types.length)];
+      const size = Math.random() * 8 + 4;
+      const angle = Math.random() * 360;
+
+      const newParticle: TrailParticle = {
+        id: now + Math.random(),
+        x: e.clientX,
+        y: e.clientY,
+        size,
+        type,
+        angle,
+      };
+
+      setParticles((prev) => [...prev.slice(-15), newParticle]);
+    };
+
+    const handleClick = (e: MouseEvent) => {
+      const newRipple: ClickRipple = {
+        id: Date.now() + Math.random(),
+        x: e.clientX,
+        y: e.clientY,
+      };
+      setRipples((prev) => [...prev.slice(-4), newRipple]);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("click", handleClick, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (particles.length === 0) return;
+    const timer = setTimeout(() => {
+      setParticles((prev) => prev.slice(1));
+    }, 450);
+    return () => clearTimeout(timer);
+  }, [particles]);
+
+  useEffect(() => {
+    if (ripples.length === 0) return;
+    const timer = setTimeout(() => {
+      setRipples((prev) => prev.slice(1));
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [ripples]);
+
+  return (
+    <div className="pointer-events-none fixed inset-0 z-[9998] overflow-hidden hidden md:block">
+      {/* Click Cyber Target Lock-on Ripples */}
+      {ripples.map((r) => (
+        <motion.div
+          key={r.id}
+          initial={{ scale: 0.2, opacity: 0.9 }}
+          animate={{ scale: 2.2, opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="absolute h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed"
+          style={{
+            left: r.x,
+            top: r.y,
+            borderColor: "var(--accent)",
+            boxShadow: "0 0 15px var(--accent)",
+          }}
+        />
+      ))}
+
+      {/* Cyber Particle Sparks */}
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          initial={{ scale: 1, opacity: 0.85, rotate: p.angle }}
+          animate={{ scale: 0, opacity: 0, y: -14, rotate: p.angle + 45 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center font-mono font-bold text-[10px]"
+          style={{
+            left: p.x,
+            top: p.y,
+            color: "var(--accent)",
+          }}
+        >
+          {p.type === "plus" ? (
+            <span>+</span>
+          ) : p.type === "ring" ? (
+            <span
+              className="h-2 w-2 rounded-full border"
+              style={{ borderColor: "var(--accent)", boxShadow: "0 0 6px var(--accent)" }}
+            />
+          ) : (
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: "var(--accent)", boxShadow: "0 0 8px var(--accent)" }}
+            />
+          )}
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 /* -------------------- PAGE -------------------- */
 
 function HomePage() {
   return (
     <main className="relative overflow-x-hidden">
       <ScrollProgress />
-      <Nav />
+      <Header />
       <SocialRail />
       <CursorGlow />
+      <CyberMouseTrail />
       <Hero />
       <About />
       <Work />

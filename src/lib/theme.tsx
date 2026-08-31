@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export type Accent = "orange" | "green" | "blue" | "purple" | "gold";
+export type Accent = "orange" | "green" | "blue" | "purple" | "gold" | "pink" | "cyan";
 export type Mode = "dark" | "light";
 
 interface ThemeCtx {
@@ -19,6 +19,8 @@ export const ACCENTS: { key: Accent; hex: string }[] = [
   { key: "blue", hex: "#3aa2ff" },
   { key: "purple", hex: "#a970ff" },
   { key: "gold", hex: "#f0c04a" },
+  { key: "pink", hex: "#ec4899" },
+  { key: "cyan", hex: "#06b6d4" },
 ];
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
