@@ -63,16 +63,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Felix Royson — Cybersecurity Engineer & Researcher" },
+      { title: "Felix Royson A — Computer Science Student | Cybersecurity" },
       {
         name: "description",
         content:
-          "Portfolio of Felix Royson — cybersecurity engineer, security researcher, and M.Tech CSE student engineering trust into digital systems.",
+          "Portfolio of Felix Royson A — Computer Science & Engineering student specializing in cybersecurity, Android development, networking, and secure systems.",
       },
-      { property: "og:title", content: "Felix Royson — Cybersecurity Engineer & Researcher" },
+      { property: "og:title", content: "Felix Royson A — Cybersecurity & Secure Systems" },
       {
         property: "og:description",
-        content: "Engineering secure digital systems. Research, projects, and publications.",
+        content: "Building secure, reliable software for defence and security-sensitive environments.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

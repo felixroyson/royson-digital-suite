@@ -20,6 +20,18 @@ import {
   ArrowDown,
   MapPin,
   ShieldCheck,
+  Phone,
+  GraduationCap,
+  Award,
+  Terminal,
+  ExternalLink,
+  Copy,
+  Check,
+  GitBranch,
+  FileCode,
+  Layers,
+  Cpu,
+  CheckCircle2,
 } from "lucide-react";
 import portrait from "@/assets/hero-portrait.png";
 console.log("Portrait URL:", portrait);
@@ -28,23 +40,23 @@ export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
-      { title: "Felix Royson — Cybersecurity Engineer & Researcher" },
+      { title: "Felix Royson A — Computer Science Student | Cybersecurity" },
       {
         name: "description",
         content:
-          "Felix Royson A — Computer Science student specialising in cybersecurity, vulnerability assessment, and security research. Portfolio, projects, and publications.",
+          "Felix Royson A — Computer Science and Engineering student specializing in cybersecurity, Android application development, networking, and secure systems.",
       },
-      { property: "og:title", content: "Felix Royson — Cybersecurity Engineer & Researcher" },
+      { property: "og:title", content: "Felix Royson A — Cybersecurity & Secure Systems" },
       {
         property: "og:description",
         content:
-          "Cybersecurity engineer & researcher. SOC dashboards, pentest platforms, Android security, and threat research.",
+          "Cybersecurity, Android security frameworks, geolocation safety suites, and SOC dashboards by Felix Royson A.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://felixroys.netlify.app" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://felixroys.netlify.app" }],
   }),
 });
 
@@ -52,11 +64,15 @@ export const Route = createFileRoute("/")({
 
 const CONTACT = {
   name: "Felix Royson A",
+  headline: "Computer Science Student | Cybersecurity",
   email: "felixroys2004@gmail.com",
   gmail:
-    "https://mail.google.com/mail/u/0/?fs=1&to=felixroys2004@gmail.com&tf=cm",
+    "https://mail.google.com/mail/?view=cm&fs=1&to=felixroys2004@gmail.com",
+  phone: "+91 7418915689",
+  whatsapp: "https://wa.me/917418915689",
   github: "https://github.com/felixroyson/",
-  linkedin: "https://www.linkedin.com/in/felix-royson-a-72894a374",
+  linkedin: "https://www.linkedin.com/in/felix-royson-a-72894a374/",
+  portfolio: "https://felixroys.netlify.app",
   location: "Thoothukudi, Tamil Nadu",
   resume: "/Felix_Royson_Resume.pdf",
 };
@@ -106,9 +122,8 @@ function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "backdrop-blur-xl bg-background/70 border-b border-border" : ""
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "backdrop-blur-xl bg-background/70 border-b border-border" : ""
+        }`}
     >
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 md:px-10">
         <a href="#home" className="group flex items-center gap-3">
@@ -289,7 +304,7 @@ function PokemonThemeSwitcher({ activeNavId }: { activeNavId: string }) {
 
   const handleToggleMode = () => {
     toggleMode();
-    const nextIsDark = mode === "dark"; 
+    const nextIsDark = mode === "dark";
     triggerBattle({
       pokemon: nextIsDark ? "Solgaleo" : "Lunala",
       label: nextIsDark ? "Sun" : "Moon",
@@ -630,9 +645,8 @@ function PokeButton({
         onMouseMove={onMove}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={onLeave}
-        className={`relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-300 ease-out overflow-hidden ${
-          active ? "animate-poke-breath" : ""
-        }`}
+        className={`relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-300 ease-out overflow-hidden ${active ? "animate-poke-breath" : ""
+          }`}
         style={{
           borderColor: active ? hex : hover ? `${hex}aa` : "color-mix(in oklab, var(--foreground) 14%, transparent)",
           background: active
@@ -746,9 +760,8 @@ function PokemonCompanionWidget() {
                     key={t.key}
                     onClick={() => setAccent(t.key)}
                     title={`Switch partner to ${t.pokemon} (${t.label})`}
-                    className={`h-3 w-3 rounded-full transition-all ${
-                      accent === t.key ? "scale-125 ring-2 ring-foreground" : "opacity-40 hover:opacity-100"
-                    }`}
+                    className={`h-3 w-3 rounded-full transition-all ${accent === t.key ? "scale-125 ring-2 ring-foreground" : "opacity-40 hover:opacity-100"
+                      }`}
                     style={{ background: t.hex }}
                   />
                 ))}
@@ -794,7 +807,7 @@ function FireIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 3c1.2 3 4.5 4.2 4.5 8.5a4.5 4.5 0 1 1-9 0c0-1.6.7-2.6 1.7-3.4-.1 1.4.7 2.2 1.5 2.2 1 0 1.4-.9 1-2C11.2 6.6 11 4.8 12 3z"
-        fill="currentColor" opacity="0.95"/>
+        fill="currentColor" opacity="0.95" />
     </svg>
   );
 }
@@ -802,8 +815,8 @@ function GrassIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 3c5 2 8 5.5 8 10 0 4.5-3.6 8-8 8s-8-3.5-8-8c0-1.6.4-3 1.1-4.2C7.2 10.6 9.4 11 12 11c0-3 0-6 0-8z"
-        fill="currentColor" opacity="0.95"/>
-      <path d="M12 21V11" stroke="rgba(0,0,0,0.35)" strokeWidth="1.2"/>
+        fill="currentColor" opacity="0.95" />
+      <path d="M12 21V11" stroke="rgba(0,0,0,0.35)" strokeWidth="1.2" />
     </svg>
   );
 }
@@ -811,22 +824,22 @@ function WaterIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 2.5c-4 5.5-6.5 9-6.5 12a6.5 6.5 0 0 0 13 0c0-3-2.5-6.5-6.5-12z"
-        fill="currentColor" opacity="0.95"/>
+        fill="currentColor" opacity="0.95" />
     </svg>
   );
 }
 function DarkIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.95"/>
-      <path d="M14.5 4.5a7.5 7.5 0 0 0 0 15 8 8 0 0 1 0-15z" fill="rgba(255,255,255,0.18)"/>
+      <circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.95" />
+      <path d="M14.5 4.5a7.5 7.5 0 0 0 0 15 8 8 0 0 1 0-15z" fill="rgba(255,255,255,0.18)" />
     </svg>
   );
 }
 function ElectricIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" strokeLinejoin="round">
-      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor" opacity="0.95"/>
+      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor" opacity="0.95" />
     </svg>
   );
 }
@@ -852,14 +865,14 @@ function PokeSunIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
       <circle cx="12" cy="12" r="4" />
-      <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>
+      <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" />
     </svg>
   );
 }
 function PokeMoonIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+      <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
     </svg>
   );
 }
@@ -889,6 +902,7 @@ function SocialRail() {
     { icon: Github, href: CONTACT.github, label: "GitHub" },
     { icon: Linkedin, href: CONTACT.linkedin, label: "LinkedIn" },
     { icon: Mail, href: CONTACT.gmail, label: "Email" },
+    { icon: Phone, href: CONTACT.whatsapp, label: "WhatsApp" },
   ];
   return (
     <div className="fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-5 2xl:flex">
@@ -1008,9 +1022,9 @@ function Hero() {
             className="mt-8 flex flex-col gap-6"
           >
             <p className="max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
-              M.Tech CSE student specialising in cybersecurity — building SOC
-              dashboards, pentest platforms, and Android security frameworks.
-              Currently exploring cloud and network security.
+              Computer Science & Engineering student specializing in cybersecurity,
+              Android application development, networking, and secure systems.
+              Building reliable software for defence and security-sensitive environments.
             </p>
             <div className="flex flex-wrap items-center gap-5 pt-1">
               <MagneticButton>
@@ -1284,79 +1298,543 @@ function Scroll3DSection({
 
 /* -------------------- ABOUT -------------------- */
 
-function About() {
-  const skills = [
-    "Vulnerability Assessment",
-    "OWASP Top 10",
-    "Web App Security",
-    "Nmap",
-    "Burp Suite",
-    "Wireshark",
-    "Metasploit",
-    "TCP/IP",
-    "DNS",
-    "Python",
-    "Linux",
-    "Git & GitHub",
+const EDUCATION = [
+  {
+    institution: "Erode Sengunthar Engineering College",
+    degree: "M.Tech — Computer Science And Engineering (Integrated)",
+    period: "2022 — 2027",
+    score: "CGPA: 8.09 (8th Semester)",
+    location: "Thoothukudi / Erode, Tamil Nadu",
+    highlights: "Cybersecurity, Android App Dev, Networking & Secure Systems",
+  },
+  {
+    institution: "Daniel Thomas Matric Higher Secondary School",
+    degree: "Higher Secondary (HSC) & Secondary (SSLC)",
+    period: "2019 — 2022",
+    score: "HSC: 76.1% · SSLC: 63.6%",
+    location: "Tamil Nadu",
+    highlights: "Foundation in Mathematics, Science & Computer Fundamentals",
+  },
+];
+
+const SKILL_CATEGORIES = [
+  {
+    name: "Cybersecurity",
+    skills: ["Vulnerability Assessment", "OWASP Top 10", "Web Application Security"],
+  },
+  {
+    name: "Security Tools",
+    skills: ["Nmap", "Burp Suite", "Wireshark", "Metasploit"],
+  },
+  {
+    name: "Networking",
+    skills: ["TCP/IP", "Routing", "DNS", "HTTP", "HTTPS"],
+  },
+  {
+    name: "Programming & Mobile",
+    skills: ["Python", "Android Studio", "Geolocation", "Authentication", "Offline-Capable Workflows"],
+  },
+  {
+    name: "Operating Systems",
+    skills: ["Linux", "Windows"],
+  },
+  {
+    name: "Version Control",
+    skills: ["Git", "GitHub"],
+  },
+];
+
+function EducationAndSkillsDiff() {
+  const [viewMode, setViewMode] = useState<"diff" | "dossier">("diff");
+  const [copied, setCopied] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+
+  const diffRaw = `diff --git a/academic/education.env b/academic/education.env
+index e809a12..2027cse 100644
+--- a/academic/education.env
++++ b/academic/education.env
+@@ -1,6 +1,24 @@ // Verified Academic Milestones
++ [DEGREE] M.Tech — Computer Science And Engineering (Integrated)
++   + institution:  Erode Sengunthar Engineering College (ESEC)
++   + duration:     2022 — 2027 (Currently in 8th Semester)
++   + grade_point:  CGPA: 8.09 / 10.00 [████████████████░░░░] 80.9%
++   + location:     Thoothukudi / Erode, Tamil Nadu
++   + focus_areas:  Cybersecurity, Android App Dev, Networking & Secure Systems
++   + status:       ENROLLED // VERIFIED ACADEMIC RECORD
++
++ [SCHOOLING] Higher Secondary Certificate (HSC) & SSLC
++   + institution:  Daniel Thomas Matric Higher Secondary School
++   + duration:     2019 — 2022
++   + evaluation:   HSC: 76.1% [███████████████░░░░░] · SSLC: 63.6% [████████████░░░░░░░░]
++   + location:     Tamil Nadu, India
++   + foundation:   Mathematics, Physics, Chemistry, Computer Science
++   + status:       COMPLETED // HONORS FOUNDATION
+
+diff --git a/capabilities/skills.sys b/capabilities/skills.sys
+index 4e77a11..9f8021a 100644
+--- a/capabilities/skills.sys
++++ b/capabilities/skills.sys
+@@ -1,8 +1,28 @@ // Technical Arsenal & Security Capabilities
++ [01_CYBERSECURITY]
++   + Vulnerability Assessment · OWASP Top 10 · Web Application Security · Threat Surface Analysis
++
++ [02_SECURITY_TOOLS]
++   + Nmap (Network Recon) · Burp Suite (Web Pentesting) · Wireshark (Packet Inspection) · Metasploit
++
++ [03_NETWORKING]
++   + TCP/IP Protocol Suite · Routing & Subnetting · DNS Systems · HTTP / HTTPS Cryptographic Handshakes
++
++ [04_PROGRAMMING_&_SYSTEMS]
++   + Python (Security Tooling) · Android Studio (Native App Sec)
++   + Live Geolocation Tracking · OTP Authentication Protocols · Offline-First Resilient Workflows
++
++ [05_OPERATING_SYSTEMS]
++   + Linux (Hardening & Tooling) · Windows Security Internals
++
++ [06_VERSION_CONTROL]
++   + Git · GitHub (Secure Repositories, Workflows & CI/CD Pipelines)`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(diffRaw);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const diffLines = [
+    { type: "header", text: "diff --git a/academic/education.env b/academic/education.env" },
+    { type: "meta", text: "index e809a12..2027cse 100644" },
+    { type: "meta", text: "--- a/academic/education.env" },
+    { type: "meta", text: "+++ b/academic/education.env" },
+    { type: "chunk", text: "@@ -1,6 +1,24 @@ // Verified Academic Milestones" },
+    { type: "add-title", text: "+ [DEGREE] M.Tech — Computer Science And Engineering (Integrated)" },
+    { type: "add", text: "+   institution:  Erode Sengunthar Engineering College (ESEC)" },
+    { type: "add", text: "+   duration:     2022 — 2027 (Currently in 8th Semester)" },
+    { type: "add-highlight", text: "+   grade_point:  CGPA: 8.09 / 10.00 [████████████████░░░░] 80.9%" },
+    { type: "add", text: "+   location:     Thoothukudi / Erode, Tamil Nadu" },
+    { type: "add", text: "+   focus_areas:  Cybersecurity, Android App Dev, Networking & Secure Systems" },
+    { type: "add", text: "+   status:       ENROLLED // VERIFIED ACADEMIC RECORD" },
+    { type: "space", text: "" },
+    { type: "add-title", text: "+ [SCHOOLING] Higher Secondary Certificate (HSC) & SSLC" },
+    { type: "add", text: "+   institution:  Daniel Thomas Matric Higher Secondary School" },
+    { type: "add", text: "+   duration:     2019 — 2022" },
+    { type: "add-highlight", text: "+   evaluation:   HSC: 76.1% [███████████████░░░░░] · SSLC: 63.6% [████████████░░░░░░░░]" },
+    { type: "add", text: "+   location:     Tamil Nadu, India" },
+    { type: "add", text: "+   foundation:   Mathematics, Physics, Chemistry, Computer Science" },
+    { type: "add", text: "+   status:       COMPLETED // HONORS FOUNDATION" },
+    { type: "space", text: "" },
+    { type: "header", text: "diff --git a/capabilities/skills.sys b/capabilities/skills.sys" },
+    { type: "meta", text: "index 4e77a11..9f8021a 100644" },
+    { type: "meta", text: "--- a/capabilities/skills.sys" },
+    { type: "meta", text: "+++ b/capabilities/skills.sys" },
+    { type: "chunk", text: "@@ -1,8 +1,28 @@ // Technical Arsenal & Security Capabilities" },
+    { type: "add-title", text: "+ [01_CYBERSECURITY]" },
+    { type: "add", text: "+   Vulnerability Assessment · OWASP Top 10 · Web Application Security · Threat Surface Analysis" },
+    { type: "space", text: "" },
+    { type: "add-title", text: "+ [02_SECURITY_TOOLS]" },
+    { type: "add", text: "+   Nmap (Network Recon) · Burp Suite (Web Pentesting) · Wireshark (Packet Inspection) · Metasploit" },
+    { type: "space", text: "" },
+    { type: "add-title", text: "+ [03_NETWORKING]" },
+    { type: "add", text: "+   TCP/IP Protocol Suite · Routing & Subnetting · DNS Systems · HTTP / HTTPS Handshakes" },
+    { type: "space", text: "" },
+    { type: "add-title", text: "+ [04_PROGRAMMING_&_SYSTEMS]" },
+    { type: "add", text: "+   Python (Security Tooling) · Android Studio (Native App Sec)" },
+    { type: "add", text: "+   Live Geolocation Tracking · OTP Authentication Protocols · Offline-First Resilient Workflows" },
+    { type: "space", text: "" },
+    { type: "add-title", text: "+ [05_OPERATING_SYSTEMS]" },
+    { type: "add", text: "+   Linux (Hardening & Tooling) · Windows Security Internals" },
+    { type: "space", text: "" },
+    { type: "add-title", text: "+ [06_VERSION_CONTROL]" },
+    { type: "add", text: "+   Git · GitHub (Secure Repositories, Workflows & CI/CD Pipelines)" },
   ];
+
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-[#0a0e17] shadow-2xl backdrop-blur-xl">
+      {/* Terminal Title Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/70 bg-background/80 px-4 py-3 backdrop-blur-md">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5">
+            <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+            <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+            <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+          </div>
+          <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
+            <GitBranch size={13} className="text-accent" />
+            <span className="text-foreground">main</span>
+            <span className="text-border">/</span>
+            <span className="hidden sm:inline text-accent">git diff --unified</span>
+            <span className="hidden md:inline text-muted-foreground/70">education.env skills.sys</span>
+          </div>
+        </div>
+
+        {/* View Mode Toggle & Copy */}
+        <div className="flex items-center gap-2">
+          <div className="flex rounded-lg border border-border bg-background/90 p-0.5 font-mono text-xs">
+            <button
+              onClick={() => setViewMode("diff")}
+              className={`flex items-center gap-1.5 rounded-md px-3 py-1 transition-all ${viewMode === "diff"
+                  ? "bg-accent/15 text-accent shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+                }`}
+            >
+              <Terminal size={12} />
+              <span>Git Diff</span>
+            </button>
+            <button
+              onClick={() => setViewMode("dossier")}
+              className={`flex items-center gap-1.5 rounded-md px-3 py-1 transition-all ${viewMode === "dossier"
+                  ? "bg-accent/15 text-accent shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+                }`}
+            >
+              <Layers size={12} />
+              <span>Credentials</span>
+            </button>
+          </div>
+
+          <button
+            onClick={handleCopy}
+            title="Copy diff to clipboard"
+            className="flex items-center gap-1.5 rounded-lg border border-border bg-background/90 px-3 py-1 font-mono text-xs text-muted-foreground transition-all hover:border-accent hover:text-accent"
+          >
+            {copied ? (
+              <>
+                <Check size={12} className="text-emerald-400" />
+                <span className="text-emerald-400">Copied</span>
+              </>
+            ) : (
+              <>
+                <Copy size={12} />
+                <span className="hidden sm:inline">Copy</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mode 1: Unified Git Diff Inspector */}
+      {viewMode === "diff" && (
+        <div className="max-h-[640px] overflow-x-auto overflow-y-auto p-4 md:p-6 font-mono text-xs md:text-[13px] leading-relaxed">
+          {diffLines.map((line, idx) => {
+            const lineNum = String(idx + 1).padStart(2, "0");
+            if (line.type === "header") {
+              return (
+                <div key={idx} className="my-2 flex items-center gap-3 font-bold text-sky-400">
+                  <span className="w-8 select-none text-right text-muted-foreground/40">{lineNum}</span>
+                  <span>{line.text}</span>
+                </div>
+              );
+            }
+            if (line.type === "meta") {
+              return (
+                <div key={idx} className="flex items-center gap-3 text-muted-foreground/60">
+                  <span className="w-8 select-none text-right text-muted-foreground/40">{lineNum}</span>
+                  <span>{line.text}</span>
+                </div>
+              );
+            }
+            if (line.type === "chunk") {
+              return (
+                <div
+                  key={idx}
+                  className="my-1.5 flex items-center gap-3 rounded bg-accent/10 px-1 py-0.5 font-bold text-accent"
+                >
+                  <span className="w-8 select-none text-right text-accent/50">{lineNum}</span>
+                  <span>{line.text}</span>
+                </div>
+              );
+            }
+            if (line.type === "space") {
+              return (
+                <div key={idx} className="flex items-center gap-3 py-0.5">
+                  <span className="w-8 select-none text-right text-muted-foreground/30">{lineNum}</span>
+                  <span className="h-2" />
+                </div>
+              );
+            }
+            if (line.type === "add-title") {
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 bg-emerald-500/[0.08] px-1 py-0.5 font-semibold text-emerald-400"
+                >
+                  <span className="w-8 select-none text-right text-emerald-500/50">{lineNum}</span>
+                  <span>{line.text}</span>
+                </div>
+              );
+            }
+            if (line.type === "add-highlight") {
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 bg-accent/[0.12] px-1 py-0.5 font-semibold text-accent"
+                >
+                  <span className="w-8 select-none text-right text-accent/50">{lineNum}</span>
+                  <span>{line.text}</span>
+                </div>
+              );
+            }
+            return (
+              <div
+                key={idx}
+                className="flex items-center gap-3 bg-emerald-500/[0.03] px-1 py-0.5 text-emerald-300/90 transition-colors hover:bg-emerald-500/[0.09]"
+              >
+                <span className="w-8 select-none text-right text-emerald-500/40">{lineNum}</span>
+                <span>{line.text}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Mode 2: Interactive Visual Credentials & Matrix */}
+      {viewMode === "dossier" && (
+        <div className="space-y-10 p-6 md:p-8">
+          {/* Education Credentials */}
+          <div>
+            <div className="mb-6 flex items-center justify-between border-b border-border pb-3">
+              <div className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-widest text-accent">
+                <GraduationCap size={16} />
+                <span>Academic Dossier</span>
+              </div>
+              <span className="font-mono text-[10px] text-muted-foreground">2 Verified Records</span>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {EDUCATION.map((edu, idx) => (
+                <div
+                  key={idx}
+                  className="group relative overflow-hidden rounded-xl border border-border bg-background/60 p-6 transition-all duration-300 hover:border-accent hover:bg-[var(--surface-1)]"
+                >
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-accent">{edu.period}</span>
+                    <span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-0.5 text-[11px] font-bold text-accent">
+                      {edu.score}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-xl font-bold tracking-tight text-foreground">
+                    {edu.institution}
+                  </h3>
+                  <p className="mt-1 text-sm font-medium text-accent">
+                    {edu.degree}
+                  </p>
+                  <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
+                    {edu.highlights}
+                  </p>
+                  <div className="mt-4 border-t border-border/70 pt-3 flex items-center justify-between text-[10px] font-mono text-muted-foreground">
+                    <span>{edu.location}</span>
+                    <span className="text-emerald-400">● VERIFIED</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Skills Capability Matrix */}
+          <div>
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-3">
+              <div className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-widest text-accent">
+                <Cpu size={16} />
+                <span>Technical Arsenal Filter</span>
+              </div>
+
+              {/* Filter Pills */}
+              <div className="flex flex-wrap gap-1.5 text-[11px] font-mono">
+                {["All", ...SKILL_CATEGORIES.map((c) => c.name)].map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`rounded-full px-2.5 py-1 transition-all ${activeCategory === cat
+                        ? "bg-accent text-accent-foreground font-bold"
+                        : "border border-border text-muted-foreground hover:border-accent hover:text-foreground"
+                      }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {SKILL_CATEGORIES.filter(
+                (c) => activeCategory === "All" || c.name === activeCategory
+              ).map((cat) => (
+                <div
+                  key={cat.name}
+                  className="rounded-xl border border-border bg-background/60 p-5 transition-all hover:border-accent hover:bg-[var(--surface-1)]"
+                >
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="font-display text-sm font-bold tracking-tight text-foreground">
+                      {cat.name}
+                    </span>
+                    <span className="font-mono text-[10px] text-accent">
+                      {cat.skills.length} tools
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.skills.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-lg border border-border/80 bg-background px-2.5 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Terminal Footer Status Bar */}
+      <div className="flex flex-wrap items-center justify-between border-t border-border/70 bg-background/90 px-4 py-2 font-mono text-[11px] text-muted-foreground">
+        <div className="flex items-center gap-3">
+          <span className="text-accent font-bold">-- COMMITTED --</span>
+          <span className="hidden sm:inline">2 files modified</span>
+          <span>48 insertions(+)</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span>utf-8</span>
+          <span className="text-border">|</span>
+          <span className="text-emerald-400">system: clean</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function About() {
   return (
     <Scroll3DSection id="about">
       <SectionLabel number="01" title="Who I Am" />
 
-      <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.3fr_1fr]">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <h2 className="font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
             I don't just <br />
             <span className="italic font-light">code.</span> I engineer{" "}
             <span className="text-accent">trust.</span>
           </h2>
-          <p className="mt-10 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Computer Science Engineering student at Erode Sengunthar Engineering
-            College (Integrated M.Tech, CGPA 8.18), specialising in
-            cybersecurity. Experienced in security operations dashboards,
-            vulnerability assessment, and web application security. Currently
-            exploring cloud security, network security, and mobile threat
-            monitoring.
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Computer Science and Engineering student specializing in cybersecurity,
+            Android application development, networking, and secure systems. Hands-on
+            experience developing security focused applications using Android Studio,
+            Python, and Linux, with experience in geolocation, authentication,
+            offline-capable workflows, vulnerability assessment, and network security.
+            Interested in building reliable and secure software for defence and security
+            sensitive environments.
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 text-sm text-muted-foreground sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-4 text-sm text-muted-foreground sm:grid-cols-2">
             <div className="flex items-center gap-3">
               <MapPin size={14} className="text-accent" />
               {CONTACT.location}
             </div>
-            <div className="flex items-center gap-3">
+            <a
+              href={CONTACT.gmail}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 transition-colors hover:text-accent"
+            >
               <Mail size={14} className="text-accent" />
               {CONTACT.email}
-            </div>
+            </a>
+            <a
+              href={CONTACT.whatsapp}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 transition-colors hover:text-accent"
+            >
+              <Phone size={14} className="text-accent" />
+              {CONTACT.phone}
+            </a>
+            <a
+              href={CONTACT.portfolio}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 transition-colors hover:text-accent"
+            >
+              <ExternalLink size={14} className="text-accent" />
+              felixroys.netlify.app
+            </a>
           </div>
-
         </div>
 
-        <div className="space-y-6">
-          {[
-            { n: "01", t: "Cybersecurity" },
-            { n: "02", t: "Cloud Security" },
-            { n: "03", t: "Android Security" },
-            { n: "04", t: "Threat Research" },
-            { n: "05", t: "Web App Security" },
-          ].map((f) => (
+        {/* Security Operator Clearance Dossier */}
+        <div className="flex flex-col justify-center">
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-background via-[var(--surface-1)] to-background p-6 md:p-8 backdrop-blur-xl shadow-2xl">
             <div
-              key={f.n}
-              className="group flex items-center justify-between border-b border-border py-4 transition-colors hover:border-accent"
-            >
-              <div className="flex items-center gap-6">
-                <span className="font-mono text-xs text-accent">{f.n}</span>
-                <span className="font-display text-xl tracking-tight md:text-2xl">
-                  {f.t}
+              aria-hidden
+              className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full opacity-20 blur-2xl"
+              style={{ background: "var(--accent)" }}
+            />
+
+            <div className="flex items-center justify-between border-b border-border/80 pb-4">
+              <div className="flex items-center gap-2.5">
+                <span className="h-2.5 w-2.5 rounded-full animate-pulse" style={{ background: "var(--accent)" }} />
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
+                  System Clearance // Active
                 </span>
               </div>
-              <ArrowUpRight
-                size={18}
-                className="text-muted-foreground transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent"
-              />
+              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
+                ID: FR-2004
+              </span>
             </div>
-          ))}
+
+            <div className="mt-6 space-y-4">
+              <div className="grid grid-cols-2 gap-4 text-xs font-mono">
+                <div>
+                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Specialization</span>
+                  <span className="text-foreground font-semibold">Cybersecurity & Defense</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Academic Level</span>
+                  <span className="text-accent font-semibold">M.Tech CSE · CGPA 8.09</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Primary Frameworks</span>
+                  <span className="text-foreground font-semibold">Android Studio · Python · Linux</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Availability</span>
+                  <span className="text-emerald-400 font-semibold">Open to Defense & Sec Roles</span>
+                </div>
+              </div>
+
+              <div className="border-t border-border/80 pt-4">
+                <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground mb-2">
+                  <span>M.TECH CSE EVALUATION (8TH SEMESTER)</span>
+                  <span className="text-accent font-bold">8.09 / 10.0 (80.9%)</span>
+                </div>
+                <div className="h-2 w-full overflow-hidden rounded-full bg-border">
+                  <div
+                    className="h-full rounded-full transition-all duration-1000"
+                    style={{ width: "80.9%", background: "var(--accent)" }}
+                  />
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-background/60 p-4 text-xs text-muted-foreground">
+                <p className="leading-relaxed">
+                  Building security-focused applications with offline-capable workflows, real-time geolocation tracking, OTP delegation, and vulnerability assessment.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Education & Skills Diff Terminal Section */}
+      <div className="mt-20">
+        <div className="mb-6 flex items-baseline gap-4">
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-accent">
+            Academic & Technical Manifest // Git Diff Inspector
+          </span>
+          <span className="h-px flex-1 bg-border" />
+        </div>
+
+        <EducationAndSkillsDiff />
       </div>
     </Scroll3DSection>
   );
@@ -1366,36 +1844,52 @@ function About() {
 
 const PROJECTS = [
   {
-    name: "SOC-X",
-    tag: "Security Ops Center",
-    period: "Jul 2025 — Aug 2025",
-    desc: "A security operations web dashboard that ingests events from a Flask API and surfaces them as alerts and incidents. Analyses events for threat level and runs SOAR-style responses — playbook execution, brute-force blocking, vulnerability scanning, and malware quarantine.",
-    stack: ["Flask", "SIEM", "SOAR", "Python"],
-    href: "https://github.com/felixroyson/soc-command-center",
+    name: "A.E.G.I.S",
+    tag: "Adaptive Emergency Geolocation & Safety",
+    period: "Aug 2026 — Present",
+    desc: "Developing a cross-platform personal safety application focused on real-time location monitoring, emergency response, trusted contacts, and routine-based safety workflows. Implementing live geolocation tracking, safe zone monitoring, SOS workflows, emergency contacts, and distance calculation. Designing offline capable and low bandwidth workflows with authentication, secure data handling, local state management, and cloud synchronization.",
+    stack: ["Android", "Geolocation", "SOS Workflows", "Auth", "Offline-First", "Cloud Sync"],
+    href: CONTACT.github,
+  },
+  {
+    name: "S.H.I.E.L.D",
+    tag: "Trusted Handover & SecureVault Framework",
+    period: "Jun 2026 — Present",
+    desc: "Developing a privacy-preserving Android cybersecurity framework that addresses the Trusted Handover Problem through delegated access control, OTP-based authorization, device monitoring, risk assessment, cryptographic vault design (SecureVault), and tamper-evident audit logging for smartphone repair and service scenarios.",
+    stack: ["Android Studio", "SecureVault", "Cybersecurity", "Access Control", "Audit Logging"],
+    href: CONTACT.github,
+  },
+  {
+    name: "LandGuard AI",
+    tag: "Intelligent Perimeter & Conflict Defense",
+    period: "2025 — Present",
+    desc: "An intelligent early-warning and perimeter defense platform combining IoT telemetry, computer vision/ML classification, and automated community alerts to detect intrusions and human-wildlife conflict along boundary and rural corridors in real time.",
+    stack: ["Python", "Machine Learning", "Computer Vision", "IoT Sensors", "Real-Time Alerts"],
+    href: CONTACT.github,
+  },
+  {
+    name: "F.A.S.A",
+    tag: "File Automation & Security Assistance",
+    period: "Feb 2026 — Apr 2026",
+    desc: "Developed a secure file analysis and automation platform to monitor and organize system files. Implemented automated file scanning and structured categorization to improve file management and visibility. Designed an interactive web interface for analyzing file metadata and system storage patterns. Built using a modular and scalable architecture to demonstrate security-focused system design principles.",
+    stack: ["Python", "Security", "Automation", "Metadata Analysis", "Web Interface"],
+    href: "https://github.com/felixroyson/trusty-file-protector",
   },
   {
     name: "PUP",
     tag: "Pentest Unified Platform",
     period: "Oct 2025 — Dec 2025",
-    desc: "A simulation-based SOC and penetration testing dashboard demonstrating security analysis workflows. Visualises simulated packet traffic, vulnerability insights, and attack surface mapping to teach defensive monitoring techniques.",
-    stack: ["Python", "Pentest", "Simulation"],
-    href: "https://github.com/felixroyson/pup",
-  },
-  {
-    name: "F.A.S.A",
-    tag: "File Automation & Security",
-    period: "Feb 2026 — Apr 2026",
-    desc: "A secure file analysis and automation platform that monitors and organises system files. Automated scanning, structured categorisation, and an interactive web interface for analysing file metadata and system storage patterns — built with a modular, security-focused architecture.",
-    stack: ["Python", "Automation", "Web"],
-    href: "https://github.com/felixroyson/trusty-file-protector",
-  },
-  {
-    name: "S.H.I.E.L.D.",
-    tag: "Trusted Handover Framework",
-    period: "Jun 2026 —",
-    desc: "A privacy-preserving Android cybersecurity framework addressing the Trusted Handover Problem — delegated access control, OTP-based authorization, device monitoring, risk assessment, and tamper-evident audit logging for smartphone repair scenarios.",
-    stack: ["Android", "Privacy", "Cryptography"],
+    desc: "A simulation-based SOC and penetration testing dashboard demonstrating security analysis workflows. Visualizes simulated packet traffic, vulnerability insights, and attack surface mapping to evaluate defensive monitoring and incident response techniques.",
+    stack: ["Python", "Pentest", "Simulation", "Traffic Analysis", "Attack Mapping"],
     href: CONTACT.github,
+  },
+  {
+    name: "SOC-X",
+    tag: "Security Operation Center Extreme",
+    period: "Jul 2025 — Aug 2025",
+    desc: "SOC-X is a security operations web dashboard that ingests events from a Flask API and displays them as alerts and incidents. It analyzes these events to determine the system’s threat level and allows SOAR-style response actions such as brute-force blocking, vulnerability scanning, and malware quarantine in real time.",
+    stack: ["Flask", "Python", "SOAR", "SIEM", "Threat Response", "Real-Time"],
+    href: "https://github.com/felixroyson/soc-command-center",
   },
 ];
 
@@ -1528,40 +2022,60 @@ function Work() {
 
 const RESEARCH = [
   {
-    name: "SecureVault",
-    status: "Research",
-    desc: "A research initiative into hardened, privacy-preserving secret storage — exploring key derivation, tamper-evident vault design, and secure recovery flows for personal and organisational data.",
+    name: "S.H.I.E.L.D / SecureVault Architecture",
+    status: "ICCCIoT 2026",
+    desc: "Research paper presentation at ICCCIoT 2026, Sri Sairam Engineering College — introducing a privacy-preserving Android cybersecurity framework that addresses the Trusted Handover Problem via delegated access control, cryptographic vault design (SecureVault), and tamper-evident audit logging.",
+  },
+  {
+    name: "Modus Mapping — Threat Modeling",
+    status: "Award Winning",
+    desc: "A proactive threat mapping and risk evaluation engine awarded Best Innovative Idea at HACKZILLA 2k25 (KPRIET) and State Rounds Finalist at BitNBuild’25 (GDSC CRCE).",
   },
 ];
 
 const ONGOING = [
   {
-    name: "A.E.G.I.E.S",
-    status: "Ongoing",
-    desc: "A personal safety and monitoring companion app — real-time alerts, trusted contact escalation, and privacy-first location signals designed for high-risk everyday scenarios.",
+    name: "A.E.G.I.S",
+    status: "Active Dev",
+    desc: "Adaptive Emergency Geolocation & Integrated Safety — personal safety companion featuring live geolocation, safe zone monitoring, SOS workflows, and offline-capable low bandwidth synchronization.",
   },
   {
-    name: "Wild Guard",
-    status: "Ongoing",
-    desc: "An early-warning platform for human-wildlife conflict — combining sensor data, ML classification, and community alerts to protect both people and wildlife in rural corridors.",
+    name: "S.H.I.E.L.D (SecureVault)",
+    status: "Active Dev",
+    desc: "Secure Handover Integrity, Evidence, Logging and Delegation — privacy-preserving Android cybersecurity framework with tamper-evident vault design solving the smartphone repair handover risk.",
+  },
+  {
+    name: "LandGuard AI",
+    status: "Active Dev",
+    desc: "Intelligent early-warning platform combining IoT sensor telemetry, computer vision/ML classification, and real-time community alerts for perimeter defense and conflict mitigation.",
   },
 ];
 
 const CERTIFICATIONS = [
   {
     venue: "Google · Coursera",
-    title: "Google Cybersecurity Professional Certificate",
-    year: "Ongoing",
+    title: "Cybersecurity Professional Certification",
+    year: "In Progress",
   },
   {
     venue: "Infosys Springboard",
-    title: "Cybersecurity Fundamentals",
-    year: "2025",
+    title: "Cybersecurity",
+    year: "Completed",
   },
   {
     venue: "Infosys Springboard",
     title: "Introduction to Python",
-    year: "2024",
+    year: "Completed",
+  },
+  {
+    venue: "ICCCIoT 2026 · Sri Sairam Engineering College",
+    title: "Research Paper Presentation — S.H.I.E.L.D",
+    year: "2026",
+  },
+  {
+    venue: "VYASA 2K26 · ESEC",
+    title: "2nd Prize — Inter College Event",
+    year: "2026",
   },
   {
     venue: "HACKZILLA 2k25 · KPRIET",
@@ -1569,9 +2083,9 @@ const CERTIFICATIONS = [
     year: "2025",
   },
   {
-    venue: "VYASA 2K26 · ESEC",
-    title: "2nd Prize — Inter College Event",
-    year: "2026",
+    venue: "GDSC CRCE · BitNBuild’25",
+    title: "Finalist — BitNBuild’25 Hackathon (State Rounds) · Modus Mapping",
+    year: "2025",
   },
 ];
 
@@ -1682,31 +2196,50 @@ function Research() {
 
 const TIMELINE = [
   {
+    year: "2019 — 2022",
+    items: [
+      "Daniel Thomas Matric Higher Secondary School — HSC: 76.1% · SSLC: 63.6%",
+    ],
+  },
+  {
     year: "2022",
     items: [
-      "Started Integrated M.Tech in CSE at Erode Sengunthar Engineering College",
+      "Started Integrated M.Tech in CSE at Erode Sengunthar Engineering College (CGPA: 8.09, 8th Sem)",
+    ],
+  },
+  {
+    year: "2024",
+    items: [
+      "Introduction to Python — Infosys Springboard Certification",
     ],
   },
   {
     year: "2025",
     items: [
-      "SOC-X — Security Operations Dashboard",
-      "PUP — Pentest Unified Platform",
-      "HACKZILLA 2k25 — Best Innovative Idea Award",
-      "BitNBuild'25 State Round — Finalist",
+      "SOC-X — Security Operation Center Extreme (Jul 2025 — Aug 2025)",
+      "PUP — Pentest Unified Platform (Oct 2025 — Dec 2025)",
+      "LandGuard AI — Perimeter Defense & Early Warning Platform",
+      "Cybersecurity — Infosys Springboard Certification",
+      "HACKZILLA 2k25 Hackathon (KPRIET) — Best Innovative Idea Award (Modus Mapping)",
+      "BitNBuild’25 Hackathon (State Rounds, GDSC CRCE) — Finalist (Modus Mapping)",
     ],
   },
   {
     year: "2026",
     items: [
-      "F.A.S.A — File Automation & Security Assistance",
-      "S.H.I.E.L.D. — Trusted Handover Framework",
-      "VYASA 2K26 — 2nd Prize (Inter College)",
+      "A.E.G.I.S — Adaptive Emergency Geolocation & Integrated Safety (Aug 2026 — Present)",
+      "S.H.I.E.L.D / SecureVault — Secure Handover Android Framework (Jun 2026 — Present)",
+      "F.A.S.A — File Automation and Security Assistance (Feb 2026 — Apr 2026)",
+      "ICCCIoT 2026, Sri Sairam Engineering College — Research Paper Presentation (S.H.I.E.L.D / SecureVault)",
+      "VYASA 2K26 Inter College Event (ESEC) — 2nd Prize Winner",
+      "Google & Coursera — Cybersecurity Professional Certification (In Progress)",
     ],
   },
   {
     year: "2027",
-    items: ["Graduating M.Tech · Cybersecurity focus"],
+    items: [
+      "Graduating Integrated M.Tech in Computer Science and Engineering",
+    ],
   },
 ];
 
@@ -1794,11 +2327,11 @@ function Journey() {
 /* -------------------- STATS -------------------- */
 
 const STATS = [
-  { n: 4, suffix: "+", label: "Security Projects" },
+  { n: 6, suffix: "", label: "Flagship Projects" },
   { n: 3, suffix: "", label: "Certifications" },
-  { n: 2, suffix: "+", label: "Hackathon Wins" },
-  { n: 8.18, suffix: "", label: "CGPA · M.Tech CSE" },
-  { n: 4, suffix: "+", label: "Years Exploring Security" },
+  { n: 4, suffix: "", label: "Awards & Honors" },
+  { n: 8.09, suffix: "", label: "CGPA · M.Tech CSE (8th Sem)" },
+  { n: 2027, suffix: "", label: "Graduation Year" },
 ];
 
 function Counter({ to, suffix }: { to: number; suffix: string }) {
@@ -1896,8 +2429,10 @@ function Contact() {
           <div className="flex flex-wrap gap-3">
             {[
               { label: "Email", icon: Mail, href: CONTACT.gmail, external: true },
+              { label: "WhatsApp", icon: Phone, href: CONTACT.whatsapp, external: true },
               { label: "GitHub", icon: Github, href: CONTACT.github, external: true },
               { label: "LinkedIn", icon: Linkedin, href: CONTACT.linkedin, external: true },
+              { label: "Portfolio", icon: ExternalLink, href: CONTACT.portfolio, external: true },
               { label: "Resume", icon: Download, href: CONTACT.resume, external: false },
             ].map((b) => (
               <a
@@ -1969,29 +2504,25 @@ type Logo = { name: string; slug: string; darkInvert?: boolean };
 const STACK_ROW_1: Logo[] = [
   { name: "Linux", slug: "linux" },
   { name: "Python", slug: "python" },
-  { name: "React", slug: "react" },
-  { name: "Next.js", slug: "nextdotjs", darkInvert: true },
-  { name: "TypeScript", slug: "typescript" },
-  { name: "Tailwind CSS", slug: "tailwindcss" },
-  { name: "Docker", slug: "docker" },
-  { name: "AWS", slug: "amazonwebservices", darkInvert: true },
-  { name: "Firebase", slug: "firebase" },
-  { name: "Supabase", slug: "supabase" },
+  { name: "Android Studio", slug: "androidstudio" },
+  { name: "Wireshark", slug: "wireshark" },
+  { name: "Nmap", slug: "nmap", darkInvert: true },
+  { name: "Burp Suite", slug: "burpsuite" },
+  { name: "Metasploit", slug: "metasploit" },
+  { name: "OWASP", slug: "owasp" },
   { name: "Git", slug: "git" },
   { name: "GitHub", slug: "github", darkInvert: true },
 ];
 
 const STACK_ROW_2: Logo[] = [
-  { name: "MySQL", slug: "mysql" },
+  { name: "Windows", slug: "windows11" },
+  { name: "Flask", slug: "flask", darkInvert: true },
+  { name: "React", slug: "react" },
+  { name: "TypeScript", slug: "typescript" },
+  { name: "Tailwind CSS", slug: "tailwindcss" },
   { name: "PostgreSQL", slug: "postgresql" },
-  { name: "Nmap", slug: "nmap", darkInvert: true },
-  { name: "Burp Suite", slug: "burpsuite" },
-  { name: "Wireshark", slug: "wireshark" },
-  { name: "Metasploit", slug: "metasploit" },
-  { name: "OWASP", slug: "owasp" },
-  { name: "Android Studio", slug: "androidstudio" },
-  { name: "Framer Motion", slug: "framer", darkInvert: true },
-  { name: "GSAP", slug: "greensock" },
+  { name: "Firebase", slug: "firebase" },
+  { name: "Docker", slug: "docker" },
   { name: "Figma", slug: "figma" },
 ];
 
@@ -2001,7 +2532,7 @@ type ActiveLogoCtx = {
 };
 const ActiveLogoContext = React.createContext<ActiveLogoCtx>({
   activeId: null,
-  setActiveId: () => {},
+  setActiveId: () => { },
 });
 
 function LogoItem({ logo }: { logo: Logo }) {
@@ -2030,9 +2561,8 @@ function LogoItem({ logo }: { logo: Logo }) {
       {/* Accent glow on hover */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute inset-x-4 top-2 h-14 rounded-full blur-2xl transition-opacity duration-500 ${
-          open ? "opacity-70" : "opacity-0"
-        }`}
+        className={`pointer-events-none absolute inset-x-4 top-2 h-14 rounded-full blur-2xl transition-opacity duration-500 ${open ? "opacity-70" : "opacity-0"
+          }`}
         style={{ background: "color-mix(in oklab, var(--accent) 50%, transparent)" }}
       />
       <button
@@ -2143,9 +2673,8 @@ function MarqueeRow({
   return (
     <div className="group/row relative overflow-visible [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
       <div
-        className={`flex w-max ${
-          reverse ? "animate-marquee-reverse-slow" : "animate-marquee-slow"
-        } group-hover/row:[animation-play-state:paused] group-focus-within/row:[animation-play-state:paused]`}
+        className={`flex w-max ${reverse ? "animate-marquee-reverse-slow" : "animate-marquee-slow"
+          } group-hover/row:[animation-play-state:paused] group-focus-within/row:[animation-play-state:paused]`}
         style={{ animationPlayState: paused ? "paused" : "running" }}
       >
         {track.map((l, i) => (
