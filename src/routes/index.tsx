@@ -24,7 +24,6 @@ import {
   GraduationCap,
   Award,
   Terminal,
-  ExternalLink,
   Copy,
   Check,
   GitBranch,
@@ -32,6 +31,31 @@ import {
   Layers,
   Cpu,
   CheckCircle2,
+  Shield,
+  Radio,
+  Zap,
+  Activity,
+  Crosshair,
+  Lock,
+  Search,
+  Network,
+  Smartphone,
+  Server,
+  Play,
+  Flame,
+  Sparkles,
+  RefreshCw,
+  Globe,
+  Key,
+  ShieldAlert,
+  Bot,
+  Heart,
+  Smile,
+  Eye,
+  Maximize2,
+  ChevronLeft,
+  ChevronRight,
+  X,
 } from "lucide-react";
 import portrait from "@/assets/hero-portrait.png";
 console.log("Portrait URL:", portrait);
@@ -40,17 +64,17 @@ export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
-      { title: "Felix Royson A — Computer Science Student | Cybersecurity" },
+      { title: "Felix Royson A — Computer Science Student | Security Engineer" },
       {
         name: "description",
         content:
-          "Felix Royson A — Computer Science and Engineering student specializing in cybersecurity, Android application development, networking, and secure systems.",
+          "Felix Royson A — Integrated M.Tech. Computer Science and Engineering student focused on cybersecurity, security engineering, and intelligent application development.",
       },
-      { property: "og:title", content: "Felix Royson A — Cybersecurity & Secure Systems" },
+      { property: "og:title", content: "Felix Royson A — Security Engineer & Cybersecurity" },
       {
         property: "og:description",
         content:
-          "Cybersecurity, Android security frameworks, geolocation safety suites, and SOC dashboards by Felix Royson A.",
+          "Cybersecurity, Android DPC security frameworks, AI landslide early warning GIS, and SOC platforms by Felix Royson A.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://felixroys.netlify.app" },
@@ -64,7 +88,7 @@ export const Route = createFileRoute("/")({
 
 const CONTACT = {
   name: "Felix Royson A",
-  headline: "Computer Science Student | Cybersecurity",
+  headline: "Computer Science Student | Security Engineer",
   email: "felixroys2004@gmail.com",
   gmail:
     "https://mail.google.com/mail/?view=cm&fs=1&to=felixroys2004@gmail.com",
@@ -1022,9 +1046,9 @@ function Hero() {
             className="mt-8 flex flex-col gap-6"
           >
             <p className="max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
-              Computer Science & Engineering student specializing in cybersecurity,
-              Android application development, networking, and secure systems.
-              Building reliable software for defence and security-sensitive environments.
+              Integrated M.Tech. CSE student focused on cybersecurity, security engineering,
+              and intelligent application development. Designing secure, reliable systems and
+              applying intelligent solutions to real-world security challenges.
             </p>
             <div className="flex flex-wrap items-center gap-5 pt-1">
               <MagneticButton>
@@ -1296,612 +1320,425 @@ function Scroll3DSection({
   );
 }
 
+
+
+
+
 /* -------------------- ABOUT -------------------- */
-
-const EDUCATION = [
-  {
-    institution: "Erode Sengunthar Engineering College",
-    degree: "M.Tech — Computer Science And Engineering (Integrated)",
-    period: "2022 — 2027",
-    score: "CGPA: 8.09 (8th Semester)",
-    location: "Thoothukudi / Erode, Tamil Nadu",
-    highlights: "Cybersecurity, Android App Dev, Networking & Secure Systems",
-  },
-  {
-    institution: "Daniel Thomas Matric Higher Secondary School",
-    degree: "Higher Secondary (HSC) & Secondary (SSLC)",
-    period: "2019 — 2022",
-    score: "HSC: 76.1% · SSLC: 63.6%",
-    location: "Tamil Nadu",
-    highlights: "Foundation in Mathematics, Science & Computer Fundamentals",
-  },
-];
-
-const SKILL_CATEGORIES = [
-  {
-    name: "Cybersecurity",
-    skills: ["Vulnerability Assessment", "OWASP Top 10", "Web Application Security"],
-  },
-  {
-    name: "Security Tools",
-    skills: ["Nmap", "Burp Suite", "Wireshark", "Metasploit"],
-  },
-  {
-    name: "Networking",
-    skills: ["TCP/IP", "Routing", "DNS", "HTTP", "HTTPS"],
-  },
-  {
-    name: "Programming & Mobile",
-    skills: ["Python", "Android Studio", "Geolocation", "Authentication", "Offline-Capable Workflows"],
-  },
-  {
-    name: "Operating Systems",
-    skills: ["Linux", "Windows"],
-  },
-  {
-    name: "Version Control",
-    skills: ["Git", "GitHub"],
-  },
-];
-
-function EducationAndSkillsDiff() {
-  const [viewMode, setViewMode] = useState<"diff" | "dossier">("diff");
-  const [copied, setCopied] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string>("All");
-
-  const diffRaw = `diff --git a/academic/education.env b/academic/education.env
-index e809a12..2027cse 100644
---- a/academic/education.env
-+++ b/academic/education.env
-@@ -1,6 +1,24 @@ // Verified Academic Milestones
-+ [DEGREE] M.Tech — Computer Science And Engineering (Integrated)
-+   + institution:  Erode Sengunthar Engineering College (ESEC)
-+   + duration:     2022 — 2027 (Currently in 8th Semester)
-+   + grade_point:  CGPA: 8.09 / 10.00 [████████████████░░░░] 80.9%
-+   + location:     Thoothukudi / Erode, Tamil Nadu
-+   + focus_areas:  Cybersecurity, Android App Dev, Networking & Secure Systems
-+   + status:       ENROLLED // VERIFIED ACADEMIC RECORD
-+
-+ [SCHOOLING] Higher Secondary Certificate (HSC) & SSLC
-+   + institution:  Daniel Thomas Matric Higher Secondary School
-+   + duration:     2019 — 2022
-+   + evaluation:   HSC: 76.1% [███████████████░░░░░] · SSLC: 63.6% [████████████░░░░░░░░]
-+   + location:     Tamil Nadu, India
-+   + foundation:   Mathematics, Physics, Chemistry, Computer Science
-+   + status:       COMPLETED // HONORS FOUNDATION
-
-diff --git a/capabilities/skills.sys b/capabilities/skills.sys
-index 4e77a11..9f8021a 100644
---- a/capabilities/skills.sys
-+++ b/capabilities/skills.sys
-@@ -1,8 +1,28 @@ // Technical Arsenal & Security Capabilities
-+ [01_CYBERSECURITY]
-+   + Vulnerability Assessment · OWASP Top 10 · Web Application Security · Threat Surface Analysis
-+
-+ [02_SECURITY_TOOLS]
-+   + Nmap (Network Recon) · Burp Suite (Web Pentesting) · Wireshark (Packet Inspection) · Metasploit
-+
-+ [03_NETWORKING]
-+   + TCP/IP Protocol Suite · Routing & Subnetting · DNS Systems · HTTP / HTTPS Cryptographic Handshakes
-+
-+ [04_PROGRAMMING_&_SYSTEMS]
-+   + Python (Security Tooling) · Android Studio (Native App Sec)
-+   + Live Geolocation Tracking · OTP Authentication Protocols · Offline-First Resilient Workflows
-+
-+ [05_OPERATING_SYSTEMS]
-+   + Linux (Hardening & Tooling) · Windows Security Internals
-+
-+ [06_VERSION_CONTROL]
-+   + Git · GitHub (Secure Repositories, Workflows & CI/CD Pipelines)`;
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(diffRaw);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const diffLines = [
-    { type: "header", text: "diff --git a/academic/education.env b/academic/education.env" },
-    { type: "meta", text: "index e809a12..2027cse 100644" },
-    { type: "meta", text: "--- a/academic/education.env" },
-    { type: "meta", text: "+++ b/academic/education.env" },
-    { type: "chunk", text: "@@ -1,6 +1,24 @@ // Verified Academic Milestones" },
-    { type: "add-title", text: "+ [DEGREE] M.Tech — Computer Science And Engineering (Integrated)" },
-    { type: "add", text: "+   institution:  Erode Sengunthar Engineering College (ESEC)" },
-    { type: "add", text: "+   duration:     2022 — 2027 (Currently in 8th Semester)" },
-    { type: "add-highlight", text: "+   grade_point:  CGPA: 8.09 / 10.00 [████████████████░░░░] 80.9%" },
-    { type: "add", text: "+   location:     Thoothukudi / Erode, Tamil Nadu" },
-    { type: "add", text: "+   focus_areas:  Cybersecurity, Android App Dev, Networking & Secure Systems" },
-    { type: "add", text: "+   status:       ENROLLED // VERIFIED ACADEMIC RECORD" },
-    { type: "space", text: "" },
-    { type: "add-title", text: "+ [SCHOOLING] Higher Secondary Certificate (HSC) & SSLC" },
-    { type: "add", text: "+   institution:  Daniel Thomas Matric Higher Secondary School" },
-    { type: "add", text: "+   duration:     2019 — 2022" },
-    { type: "add-highlight", text: "+   evaluation:   HSC: 76.1% [███████████████░░░░░] · SSLC: 63.6% [████████████░░░░░░░░]" },
-    { type: "add", text: "+   location:     Tamil Nadu, India" },
-    { type: "add", text: "+   foundation:   Mathematics, Physics, Chemistry, Computer Science" },
-    { type: "add", text: "+   status:       COMPLETED // HONORS FOUNDATION" },
-    { type: "space", text: "" },
-    { type: "header", text: "diff --git a/capabilities/skills.sys b/capabilities/skills.sys" },
-    { type: "meta", text: "index 4e77a11..9f8021a 100644" },
-    { type: "meta", text: "--- a/capabilities/skills.sys" },
-    { type: "meta", text: "+++ b/capabilities/skills.sys" },
-    { type: "chunk", text: "@@ -1,8 +1,28 @@ // Technical Arsenal & Security Capabilities" },
-    { type: "add-title", text: "+ [01_CYBERSECURITY]" },
-    { type: "add", text: "+   Vulnerability Assessment · OWASP Top 10 · Web Application Security · Threat Surface Analysis" },
-    { type: "space", text: "" },
-    { type: "add-title", text: "+ [02_SECURITY_TOOLS]" },
-    { type: "add", text: "+   Nmap (Network Recon) · Burp Suite (Web Pentesting) · Wireshark (Packet Inspection) · Metasploit" },
-    { type: "space", text: "" },
-    { type: "add-title", text: "+ [03_NETWORKING]" },
-    { type: "add", text: "+   TCP/IP Protocol Suite · Routing & Subnetting · DNS Systems · HTTP / HTTPS Handshakes" },
-    { type: "space", text: "" },
-    { type: "add-title", text: "+ [04_PROGRAMMING_&_SYSTEMS]" },
-    { type: "add", text: "+   Python (Security Tooling) · Android Studio (Native App Sec)" },
-    { type: "add", text: "+   Live Geolocation Tracking · OTP Authentication Protocols · Offline-First Resilient Workflows" },
-    { type: "space", text: "" },
-    { type: "add-title", text: "+ [05_OPERATING_SYSTEMS]" },
-    { type: "add", text: "+   Linux (Hardening & Tooling) · Windows Security Internals" },
-    { type: "space", text: "" },
-    { type: "add-title", text: "+ [06_VERSION_CONTROL]" },
-    { type: "add", text: "+   Git · GitHub (Secure Repositories, Workflows & CI/CD Pipelines)" },
-  ];
-
-  return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-[#0a0e17] shadow-2xl backdrop-blur-xl">
-      {/* Terminal Title Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/70 bg-background/80 px-4 py-3 backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-            <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-            <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-          </div>
-          <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
-            <GitBranch size={13} className="text-accent" />
-            <span className="text-foreground">main</span>
-            <span className="text-border">/</span>
-            <span className="hidden sm:inline text-accent">git diff --unified</span>
-            <span className="hidden md:inline text-muted-foreground/70">education.env skills.sys</span>
-          </div>
-        </div>
-
-        {/* View Mode Toggle & Copy */}
-        <div className="flex items-center gap-2">
-          <div className="flex rounded-lg border border-border bg-background/90 p-0.5 font-mono text-xs">
-            <button
-              onClick={() => setViewMode("diff")}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1 transition-all ${viewMode === "diff"
-                  ? "bg-accent/15 text-accent shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-                }`}
-            >
-              <Terminal size={12} />
-              <span>Git Diff</span>
-            </button>
-            <button
-              onClick={() => setViewMode("dossier")}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1 transition-all ${viewMode === "dossier"
-                  ? "bg-accent/15 text-accent shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-                }`}
-            >
-              <Layers size={12} />
-              <span>Credentials</span>
-            </button>
-          </div>
-
-          <button
-            onClick={handleCopy}
-            title="Copy diff to clipboard"
-            className="flex items-center gap-1.5 rounded-lg border border-border bg-background/90 px-3 py-1 font-mono text-xs text-muted-foreground transition-all hover:border-accent hover:text-accent"
-          >
-            {copied ? (
-              <>
-                <Check size={12} className="text-emerald-400" />
-                <span className="text-emerald-400">Copied</span>
-              </>
-            ) : (
-              <>
-                <Copy size={12} />
-                <span className="hidden sm:inline">Copy</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mode 1: Unified Git Diff Inspector */}
-      {viewMode === "diff" && (
-        <div className="max-h-[640px] overflow-x-auto overflow-y-auto p-4 md:p-6 font-mono text-xs md:text-[13px] leading-relaxed">
-          {diffLines.map((line, idx) => {
-            const lineNum = String(idx + 1).padStart(2, "0");
-            if (line.type === "header") {
-              return (
-                <div key={idx} className="my-2 flex items-center gap-3 font-bold text-sky-400">
-                  <span className="w-8 select-none text-right text-muted-foreground/40">{lineNum}</span>
-                  <span>{line.text}</span>
-                </div>
-              );
-            }
-            if (line.type === "meta") {
-              return (
-                <div key={idx} className="flex items-center gap-3 text-muted-foreground/60">
-                  <span className="w-8 select-none text-right text-muted-foreground/40">{lineNum}</span>
-                  <span>{line.text}</span>
-                </div>
-              );
-            }
-            if (line.type === "chunk") {
-              return (
-                <div
-                  key={idx}
-                  className="my-1.5 flex items-center gap-3 rounded bg-accent/10 px-1 py-0.5 font-bold text-accent"
-                >
-                  <span className="w-8 select-none text-right text-accent/50">{lineNum}</span>
-                  <span>{line.text}</span>
-                </div>
-              );
-            }
-            if (line.type === "space") {
-              return (
-                <div key={idx} className="flex items-center gap-3 py-0.5">
-                  <span className="w-8 select-none text-right text-muted-foreground/30">{lineNum}</span>
-                  <span className="h-2" />
-                </div>
-              );
-            }
-            if (line.type === "add-title") {
-              return (
-                <div
-                  key={idx}
-                  className="flex items-center gap-3 bg-emerald-500/[0.08] px-1 py-0.5 font-semibold text-emerald-400"
-                >
-                  <span className="w-8 select-none text-right text-emerald-500/50">{lineNum}</span>
-                  <span>{line.text}</span>
-                </div>
-              );
-            }
-            if (line.type === "add-highlight") {
-              return (
-                <div
-                  key={idx}
-                  className="flex items-center gap-3 bg-accent/[0.12] px-1 py-0.5 font-semibold text-accent"
-                >
-                  <span className="w-8 select-none text-right text-accent/50">{lineNum}</span>
-                  <span>{line.text}</span>
-                </div>
-              );
-            }
-            return (
-              <div
-                key={idx}
-                className="flex items-center gap-3 bg-emerald-500/[0.03] px-1 py-0.5 text-emerald-300/90 transition-colors hover:bg-emerald-500/[0.09]"
-              >
-                <span className="w-8 select-none text-right text-emerald-500/40">{lineNum}</span>
-                <span>{line.text}</span>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Mode 2: Interactive Visual Credentials & Matrix */}
-      {viewMode === "dossier" && (
-        <div className="space-y-10 p-6 md:p-8">
-          {/* Education Credentials */}
-          <div>
-            <div className="mb-6 flex items-center justify-between border-b border-border pb-3">
-              <div className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-widest text-accent">
-                <GraduationCap size={16} />
-                <span>Academic Dossier</span>
-              </div>
-              <span className="font-mono text-[10px] text-muted-foreground">2 Verified Records</span>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {EDUCATION.map((edu, idx) => (
-                <div
-                  key={idx}
-                  className="group relative overflow-hidden rounded-xl border border-border bg-background/60 p-6 transition-all duration-300 hover:border-accent hover:bg-[var(--surface-1)]"
-                >
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-accent">{edu.period}</span>
-                    <span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-0.5 text-[11px] font-bold text-accent">
-                      {edu.score}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 font-display text-xl font-bold tracking-tight text-foreground">
-                    {edu.institution}
-                  </h3>
-                  <p className="mt-1 text-sm font-medium text-accent">
-                    {edu.degree}
-                  </p>
-                  <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
-                    {edu.highlights}
-                  </p>
-                  <div className="mt-4 border-t border-border/70 pt-3 flex items-center justify-between text-[10px] font-mono text-muted-foreground">
-                    <span>{edu.location}</span>
-                    <span className="text-emerald-400">● VERIFIED</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Skills Capability Matrix */}
-          <div>
-            <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-3">
-              <div className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-widest text-accent">
-                <Cpu size={16} />
-                <span>Technical Arsenal Filter</span>
-              </div>
-
-              {/* Filter Pills */}
-              <div className="flex flex-wrap gap-1.5 text-[11px] font-mono">
-                {["All", ...SKILL_CATEGORIES.map((c) => c.name)].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`rounded-full px-2.5 py-1 transition-all ${activeCategory === cat
-                        ? "bg-accent text-accent-foreground font-bold"
-                        : "border border-border text-muted-foreground hover:border-accent hover:text-foreground"
-                      }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {SKILL_CATEGORIES.filter(
-                (c) => activeCategory === "All" || c.name === activeCategory
-              ).map((cat) => (
-                <div
-                  key={cat.name}
-                  className="rounded-xl border border-border bg-background/60 p-5 transition-all hover:border-accent hover:bg-[var(--surface-1)]"
-                >
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="font-display text-sm font-bold tracking-tight text-foreground">
-                      {cat.name}
-                    </span>
-                    <span className="font-mono text-[10px] text-accent">
-                      {cat.skills.length} tools
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {cat.skills.map((s) => (
-                      <span
-                        key={s}
-                        className="rounded-lg border border-border/80 bg-background px-2.5 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Terminal Footer Status Bar */}
-      <div className="flex flex-wrap items-center justify-between border-t border-border/70 bg-background/90 px-4 py-2 font-mono text-[11px] text-muted-foreground">
-        <div className="flex items-center gap-3">
-          <span className="text-accent font-bold">-- COMMITTED --</span>
-          <span className="hidden sm:inline">2 files modified</span>
-          <span>48 insertions(+)</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span>utf-8</span>
-          <span className="text-border">|</span>
-          <span className="text-emerald-400">system: clean</span>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function About() {
   return (
     <Scroll3DSection id="about">
       <SectionLabel number="01" title="Who I Am" />
 
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <h2 className="font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
-            I don't just <br />
-            <span className="italic font-light">code.</span> I engineer{" "}
-            <span className="text-accent">trust.</span>
-          </h2>
-          <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Computer Science and Engineering student specializing in cybersecurity,
-            Android application development, networking, and secure systems. Hands-on
-            experience developing security focused applications using Android Studio,
-            Python, and Linux, with experience in geolocation, authentication,
-            offline-capable workflows, vulnerability assessment, and network security.
-            Interested in building reliable and secure software for defence and security
-            sensitive environments.
-          </p>
+      <div className="max-w-4xl">
+        <h2 className="font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
+          I don't just <br />
+          <span className="italic font-light">code.</span> I engineer{" "}
+          <span className="text-accent">trust.</span>
+        </h2>
+        <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          Integrated M.Tech. in Computer Science and Engineering student focused on cybersecurity,
+          security engineering, and intelligent application development. Hands-on project experience in
+          developing security-focused applications and AI-powered solutions, with foundational knowledge
+          of vulnerability assessment, web application security, networking, Python, and security
+          monitoring. Interested in designing secure, reliable systems and applying intelligent
+          technologies to real-world security challenges.
+        </p>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 text-sm text-muted-foreground sm:grid-cols-2">
-            <div className="flex items-center gap-3">
-              <MapPin size={14} className="text-accent" />
-              {CONTACT.location}
-            </div>
-            <a
-              href={CONTACT.gmail}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-3 transition-colors hover:text-accent"
-            >
-              <Mail size={14} className="text-accent" />
-              {CONTACT.email}
-            </a>
-            <a
-              href={CONTACT.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-3 transition-colors hover:text-accent"
-            >
-              <Phone size={14} className="text-accent" />
-              {CONTACT.phone}
-            </a>
-            <a
-              href={CONTACT.portfolio}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-3 transition-colors hover:text-accent"
-            >
-              <ExternalLink size={14} className="text-accent" />
-              felixroys.netlify.app
-            </a>
+        <div className="mt-8 grid grid-cols-1 gap-4 text-sm text-muted-foreground sm:grid-cols-2 max-w-xl">
+          <div className="flex items-center gap-3">
+            <MapPin size={14} className="text-accent" />
+            {CONTACT.location}
           </div>
+          <a
+            href={CONTACT.gmail}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 transition-colors hover:text-accent"
+          >
+            <Mail size={14} className="text-accent" />
+            {CONTACT.email}
+          </a>
+          <a
+            href={CONTACT.whatsapp}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 transition-colors hover:text-accent"
+          >
+            <Phone size={14} className="text-accent" />
+            {CONTACT.phone}
+          </a>
+          <a
+            href={CONTACT.github}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 transition-colors hover:text-accent"
+          >
+            <Github size={14} className="text-accent" />
+            github.com/felixroyson
+          </a>
         </div>
 
-        {/* Security Operator Clearance Dossier */}
-        <div className="flex flex-col justify-center">
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-background via-[var(--surface-1)] to-background p-6 md:p-8 backdrop-blur-xl shadow-2xl">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full opacity-20 blur-2xl"
-              style={{ background: "var(--accent)" }}
-            />
-
-            <div className="flex items-center justify-between border-b border-border/80 pb-4">
-              <div className="flex items-center gap-2.5">
-                <span className="h-2.5 w-2.5 rounded-full animate-pulse" style={{ background: "var(--accent)" }} />
-                <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-                  System Clearance // Active
-                </span>
-              </div>
-              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
-                ID: FR-2004
-              </span>
+        {/* Education & Experience Cards */}
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {/* Internship Experience */}
+          <div className="rounded-xl border border-border bg-card/60 p-6 backdrop-blur-sm transition-all hover:border-accent">
+            <div className="flex items-center gap-2 text-accent font-mono text-xs uppercase tracking-wider">
+              <ShieldCheck size={16} />
+              <span>Internship Experience</span>
             </div>
-
-            <div className="mt-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4 text-xs font-mono">
-                <div>
-                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Specialization</span>
-                  <span className="text-foreground font-semibold">Cybersecurity & Defense</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Academic Level</span>
-                  <span className="text-accent font-semibold">M.Tech CSE · CGPA 8.09</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Primary Frameworks</span>
-                  <span className="text-foreground font-semibold">Android Studio · Python · Linux</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground block text-[10px] uppercase tracking-wider">Availability</span>
-                  <span className="text-emerald-400 font-semibold">Open to Defense & Sec Roles</span>
-                </div>
+            <div className="mt-4">
+              <div className="flex items-baseline justify-between gap-2">
+                <h4 className="font-display text-xl font-bold">SOC Intern</h4>
+                <span className="font-mono text-xs text-muted-foreground">Sep 2026 — Oct 2026</span>
               </div>
-
-              <div className="border-t border-border/80 pt-4">
-                <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground mb-2">
-                  <span>M.TECH CSE EVALUATION (8TH SEMESTER)</span>
-                  <span className="text-accent font-bold">8.09 / 10.0 (80.9%)</span>
-                </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-border">
-                  <div
-                    className="h-full rounded-full transition-all duration-1000"
-                    style={{ width: "80.9%", background: "var(--accent)" }}
-                  />
-                </div>
+              <div className="text-sm font-medium text-accent">TriosCyber · Virtual</div>
+              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                Completed a task-based Security Operations Center internship program. Focused on security monitoring, log analysis, alert triage, and incident investigation fundamentals using Wazuh, Splunk, and MITRE ATT&CK.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {["Wazuh", "Splunk", "MITRE ATT&CK", "Log Analysis", "Alert Triage"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[10px] text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
+            </div>
+          </div>
 
-              <div className="rounded-xl border border-border/60 bg-background/60 p-4 text-xs text-muted-foreground">
-                <p className="leading-relaxed">
-                  Building security-focused applications with offline-capable workflows, real-time geolocation tracking, OTP delegation, and vulnerability assessment.
-                </p>
+          {/* Education */}
+          <div className="rounded-xl border border-border bg-card/60 p-6 backdrop-blur-sm transition-all hover:border-accent">
+            <div className="flex items-center gap-2 text-accent font-mono text-xs uppercase tracking-wider">
+              <GraduationCap size={16} />
+              <span>Academic Education</span>
+            </div>
+            <div className="mt-4">
+              <div className="flex items-baseline justify-between gap-2">
+                <h4 className="font-display text-xl font-bold">Integrated M.Tech in CSE</h4>
+                <span className="font-mono text-xs text-muted-foreground">2022 — 2027</span>
+              </div>
+              <div className="text-sm font-medium text-accent">Erode Sengunthar Engineering College</div>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Perundurai, Tamil Nadu · <span className="font-semibold text-foreground">CGPA: 8.09</span> (up to 8th Semester)
+              </p>
+              <div className="mt-4 border-t border-border pt-3">
+                <div className="flex items-baseline justify-between text-xs">
+                  <span className="font-medium text-foreground">Daniel Thomas Matric Higher Sec. School</span>
+                  <span className="font-mono text-muted-foreground">2019 — 2022</span>
+                </div>
+                <div className="mt-1 flex gap-3 text-[11px] text-muted-foreground font-mono">
+                  <span>HSC: 76.1%</span>
+                  <span>·</span>
+                  <span>SSLC: 63.6%</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Education & Skills Diff Terminal Section */}
-      <div className="mt-20">
-        <div className="mb-6 flex items-baseline gap-4">
-          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-accent">
-            Academic & Technical Manifest // Git Diff Inspector
-          </span>
-          <span className="h-px flex-1 bg-border" />
-        </div>
-
-        <EducationAndSkillsDiff />
       </div>
     </Scroll3DSection>
   );
 }
 
-/* -------------------- WORK -------------------- */
+/* -------------------- WORK & PROJECT IMAGES SHOWCASE -------------------- */
 
-const PROJECTS = [
-  {
-    name: "A.E.G.I.S",
-    tag: "Adaptive Emergency Geolocation & Safety",
-    period: "Aug 2026 — Present",
-    desc: "Developing a cross-platform personal safety application focused on real-time location monitoring, emergency response, trusted contacts, and routine-based safety workflows. Implementing live geolocation tracking, safe zone monitoring, SOS workflows, emergency contacts, and distance calculation. Designing offline capable and low bandwidth workflows with authentication, secure data handling, local state management, and cloud synchronization.",
-    stack: ["Android", "Geolocation", "SOS Workflows", "Auth", "Offline-First", "Cloud Sync"],
-    href: CONTACT.github,
-  },
+type ProjectItem = {
+  name: string;
+  tag: string;
+  category: string | string[];
+  period: string;
+  desc: string;
+  stack: string[];
+  image: string;
+  statusBadge: string;
+  highlights: string[];
+  systemFile: string;
+  href: string;
+};
+
+const PROJECTS: ProjectItem[] = [
   {
     name: "S.H.I.E.L.D",
-    tag: "Trusted Handover & SecureVault Framework",
+    tag: "Secure Handover Integrity, Evidence, Logging and Delegation",
+    category: ["Cybersecurity", "Android & Safety"],
     period: "Jun 2026 — Present",
-    desc: "Developing a privacy-preserving Android cybersecurity framework that addresses the Trusted Handover Problem through delegated access control, OTP-based authorization, device monitoring, risk assessment, cryptographic vault design (SecureVault), and tamper-evident audit logging for smartphone repair and service scenarios.",
-    stack: ["Android Studio", "SecureVault", "Cybersecurity", "Access Control", "Audit Logging"],
+    desc: "Developing an unrooted Android DPC-based security framework for protecting sensitive applications and data during temporary device handovers. Implemented application isolation, USB restrictions, TEE-backed cryptographic key management, remote emergency lockdown, and security audit logging.",
+    stack: ["Android Studio", "Kotlin Jetpack Compose", "Android DPC", "TEE Cryptography", "Audit Logging"],
+    image: "/projects/shield.jpg",
+    statusBadge: "ICCCIoT 2026 #309",
+    highlights: ["Unrooted Android DPC Isolation", "TEE-Backed Cryptographic Keys", "Remote Emergency Lockdown"],
+    systemFile: "shield-dpc-framework.kt",
     href: CONTACT.github,
   },
   {
     name: "LandGuard AI",
-    tag: "Intelligent Perimeter & Conflict Defense",
-    period: "2025 — Present",
-    desc: "An intelligent early-warning and perimeter defense platform combining IoT telemetry, computer vision/ML classification, and automated community alerts to detect intrusions and human-wildlife conflict along boundary and rural corridors in real time.",
-    stack: ["Python", "Machine Learning", "Computer Vision", "IoT Sensors", "Real-Time Alerts"],
+    tag: "AI Powered Landslide Risk Monitoring & Early-Warning",
+    category: "AI & Automation",
+    period: "Sep 2026 — Present",
+    desc: "Developing an AI-powered landslide risk monitoring platform using satellite imagery, rainfall, terrain and soil data to identify vulnerable zones and generate early warnings. Built an interactive React-Leaflet GIS dashboard with automated risk alerts and GPS-enabled field reporting.",
+    stack: ["Python", "LightGBM", "XGBoost", "React", "TypeScript", "Leaflet", "GIS"],
+    image: "/projects/landguard.jpg",
+    statusBadge: "ACTIVE DEV",
+    highlights: ["Satellite & Soil Risk Analytics", "Interactive React-Leaflet GIS Map", "Automated Risk Alerting Engine"],
+    systemFile: "landguard-risk-engine.py",
     href: CONTACT.github,
   },
   {
     name: "F.A.S.A",
-    tag: "File Automation & Security Assistance",
+    tag: "File Automation and Security Assistance",
+    category: "Cybersecurity",
     period: "Feb 2026 — Apr 2026",
     desc: "Developed a secure file analysis and automation platform to monitor and organize system files. Implemented automated file scanning and structured categorization to improve file management and visibility. Designed an interactive web interface for analyzing file metadata and system storage patterns. Built using a modular and scalable architecture to demonstrate security-focused system design principles.",
-    stack: ["Python", "Security", "Automation", "Metadata Analysis", "Web Interface"],
+    stack: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "Multer"],
+    image: "/projects/fasa.jpg",
+    statusBadge: "COMPLETED",
+    highlights: ["Automated File Scanning & Classification", "System Storage & Metadata Analysis", "Security-Focused Modular Architecture"],
+    systemFile: "fasa-security-scanner.js",
     href: "https://github.com/felixroyson/trusty-file-protector",
-  },
-  {
-    name: "PUP",
-    tag: "Pentest Unified Platform",
-    period: "Oct 2025 — Dec 2025",
-    desc: "A simulation-based SOC and penetration testing dashboard demonstrating security analysis workflows. Visualizes simulated packet traffic, vulnerability insights, and attack surface mapping to evaluate defensive monitoring and incident response techniques.",
-    stack: ["Python", "Pentest", "Simulation", "Traffic Analysis", "Attack Mapping"],
-    href: CONTACT.github,
   },
   {
     name: "SOC-X",
     tag: "Security Operation Center Extreme",
+    category: "Cybersecurity",
     period: "Jul 2025 — Aug 2025",
-    desc: "SOC-X is a security operations web dashboard that ingests events from a Flask API and displays them as alerts and incidents. It analyzes these events to determine the system’s threat level and allows SOAR-style response actions such as brute-force blocking, vulnerability scanning, and malware quarantine in real time.",
-    stack: ["Flask", "Python", "SOAR", "SIEM", "Threat Response", "Real-Time"],
+    desc: "Developed a centralized SOC simulation platform for monitoring and analyzing security events, featuring multi-domain alert monitoring, brute-force detection, malware and vulnerability tracking, severity classification, incident escalation, IP blocking, and real-time event simulation.",
+    stack: ["React.js", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "Python"],
+    image: "/projects/socx.jpg",
+    statusBadge: "PRODUCTION SOC",
+    highlights: ["Multi-Domain Alert Monitoring", "Brute-Force & Vulnerability Tracking", "Automated IP Blocking & Escalation"],
+    systemFile: "socx-command-center.api",
     href: "https://github.com/felixroyson/soc-command-center",
+  },
+  {
+    name: "Modus Mapping",
+    tag: "Intelligent Crime Pattern Analysis Platform",
+    category: "Cybersecurity",
+    period: "Sep 2025",
+    desc: "Developed a crime-analysis platform for law enforcement to manage criminal records, visualize geographical crime patterns, and identify relationships between incidents to support investigation workflows.",
+    stack: ["React", "TypeScript", "Supabase", "Tailwind CSS", "Lucide React", "XLSX"],
+    image: "/projects/pup.jpg",
+    statusBadge: "HACKZILLA 2K25 WINNER",
+    highlights: ["Crime Pattern Geo-Visualization", "Criminal Record Management System", "Investigation Workflow Relationship Graphs"],
+    systemFile: "modus-mapping-core.tsx",
+    href: CONTACT.github,
+  },
+  {
+    name: "A.E.G.I.S",
+    tag: "Adaptive Emergency Geolocation & Safety",
+    category: "Android & Safety",
+    period: "Aug 2026 — Present",
+    desc: "Developing a cross-platform personal safety application focused on real-time location monitoring, emergency response, trusted contacts, and routine-based safety workflows. Implementing live geolocation tracking, safe zone monitoring, SOS workflows, emergency contacts, and distance calculation with offline-capable low bandwidth synchronization.",
+    stack: ["Android", "Geolocation", "SOS Workflows", "Auth", "Offline-First", "Cloud Sync"],
+    image: "/projects/aegis.jpg",
+    statusBadge: "ACTIVE DEV",
+    highlights: ["Live GPS Radar Tracking", "Instant SOS Pulse Workflow", "Offline-First Sync Engine"],
+    systemFile: "aegis-telemetry-engine.sys",
+    href: CONTACT.github,
   },
 ];
 
-function ProjectCard({ p, i }: { p: (typeof PROJECTS)[number]; i: number }) {
-  const ref = useRef<HTMLAnchorElement>(null);
+function ProjectLightboxModal({
+  projectIndex,
+  onClose,
+  onSelectIndex,
+}: {
+  projectIndex: number | null;
+  onClose: () => void;
+  onSelectIndex: (idx: number) => void;
+}) {
+  useEffect(() => {
+    if (projectIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") onSelectIndex((projectIndex + 1) % PROJECTS.length);
+      if (e.key === "ArrowLeft") onSelectIndex((projectIndex - 1 + PROJECTS.length) % PROJECTS.length);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [projectIndex, onClose, onSelectIndex]);
+
+  if (projectIndex === null || typeof document === "undefined") return null;
+
+  const p = PROJECTS[projectIndex];
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[999999] flex items-center justify-center p-3 sm:p-6 md:p-10 bg-background/90 backdrop-blur-2xl animate-in fade-in duration-200"
+      onClick={onClose}
+    >
+      <div
+        className="relative flex flex-col max-h-[94vh] w-full max-w-6xl overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Chrome Header */}
+        <div className="flex items-center justify-between border-b border-border bg-background/85 px-4 py-3 sm:px-6 sm:py-4 backdrop-blur-md">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-red-500/80 inline-block" />
+              <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-amber-500/80 inline-block" />
+              <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-emerald-500/80 inline-block" />
+            </div>
+            <span className="font-mono text-xs text-muted-foreground ml-2 hidden sm:inline">
+              {p.systemFile}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3 sm:gap-4">
+            <span className="font-mono text-xs uppercase tracking-wider text-accent font-semibold">
+              0{projectIndex + 1} / 0{PROJECTS.length}
+            </span>
+            <button
+              type="button"
+              onClick={onClose}
+              className="grid h-8 w-8 place-items-center rounded-lg border border-border bg-surface-1 text-muted-foreground transition-colors hover:border-accent hover:text-accent cursor-pointer"
+              aria-label="Close modal"
+            >
+              <X size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* Modal Main Body */}
+        <div className="grid grid-cols-1 overflow-y-auto lg:grid-cols-[1.55fr_1fr]">
+          {/* Image Preview Side */}
+          <div className="relative group/preview flex items-center justify-center bg-black/60 p-4 sm:p-6 md:p-8">
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border/60 shadow-2xl bg-black">
+              <img
+                src={p.image}
+                alt={`${p.name} high-resolution interface preview`}
+                className="h-full w-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            </div>
+
+            {/* Prev / Next controls */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelectIndex((projectIndex - 1 + PROJECTS.length) % PROJECTS.length);
+              }}
+              className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full border border-border/80 bg-background/85 text-foreground backdrop-blur-md transition-all hover:scale-110 hover:border-accent hover:text-accent cursor-pointer shadow-lg"
+              aria-label="Previous project"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelectIndex((projectIndex + 1) % PROJECTS.length);
+              }}
+              className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full border border-border/80 bg-background/85 text-foreground backdrop-blur-md transition-all hover:scale-110 hover:border-accent hover:text-accent cursor-pointer shadow-lg"
+              aria-label="Next project"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          {/* Info & Tech Stack Side */}
+          <div className="flex flex-col justify-between p-6 sm:p-8 border-t lg:border-t-0 lg:border-l border-border bg-card">
+            <div>
+              <div className="flex items-center gap-2">
+                <span
+                  className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider"
+                  style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                  {p.statusBadge}
+                </span>
+                <span className="font-mono text-xs text-muted-foreground">{p.period}</span>
+              </div>
+
+              <h3 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl">
+                {p.name}
+              </h3>
+              <p className="mt-1 font-mono text-xs text-accent uppercase tracking-wider">
+                {p.tag}
+              </p>
+
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                {p.desc}
+              </p>
+
+              {/* Architecture Highlights */}
+              <div className="mt-6">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Key Architecture & Capabilities
+                </span>
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {p.highlights.map((h) => (
+                    <div
+                      key={h}
+                      className="flex items-center gap-1.5 rounded-lg border border-border bg-surface-1 px-3 py-1.5 font-mono text-xs"
+                    >
+                      <CheckCircle2 size={12} className="text-accent" />
+                      <span>{h}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="mt-6">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Technologies & Modules
+                </span>
+                <div className="mt-2.5 flex flex-wrap gap-1.5">
+                  {p.stack.map((s) => (
+                    <span
+                      key={s}
+                      className="rounded-md border border-border/80 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Action Links */}
+            <div className="mt-8 flex items-center gap-3 border-t border-border/60 pt-6">
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-1 items-center justify-center gap-2 rounded-xl py-3 font-mono text-xs font-semibold uppercase tracking-wider text-background transition-opacity hover:opacity-90"
+                style={{ background: "var(--accent)" }}
+              >
+                <Github size={15} />
+                <span>View Repository</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+function ProjectCard({
+  p,
+  i,
+  onOpenLightbox,
+}: {
+  p: ProjectItem;
+  i: number;
+  onOpenLightbox: () => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
   const rx = useSpring(0, { stiffness: 220, damping: 22 });
   const ry = useSpring(0, { stiffness: 220, damping: 22 });
   const gx = useMotionValue(50);
   const gy = useMotionValue(50);
   const rafRef = useRef<number | null>(null);
 
-  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = ref.current;
     if (!el) return;
     const clientX = e.clientX;
@@ -1930,11 +1767,8 @@ function ProjectCard({ p, i }: { p: (typeof PROJECTS)[number]; i: number }) {
   );
 
   return (
-    <motion.a
+    <motion.div
       ref={ref}
-      href={p.href}
-      target="_blank"
-      rel="noreferrer"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       initial={{ opacity: 0, y: 40 }}
@@ -1947,7 +1781,7 @@ function ProjectCard({ p, i }: { p: (typeof PROJECTS)[number]; i: number }) {
         transformStyle: "preserve-3d",
         transformPerspective: 1200,
       }}
-      className="group relative flex flex-col justify-between overflow-hidden bg-background p-10 transition-colors duration-500 hover:bg-[var(--surface-1)]"
+      className="group relative flex flex-col justify-between overflow-hidden bg-background p-7 sm:p-10 transition-colors duration-500 hover:bg-[var(--surface-1)] border-b md:border-b-0"
     >
       {/* Pointer-tracking glow */}
       <motion.span
@@ -1956,29 +1790,132 @@ function ProjectCard({ p, i }: { p: (typeof PROJECTS)[number]; i: number }) {
         style={{ background: glow as unknown as string }}
       />
 
+      {/* Card Header */}
       <div className="relative flex items-start justify-between" style={{ transform: "translateZ(30px)" }}>
         <div className="flex flex-col gap-1">
           <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-accent">
             0{i + 1} — {p.tag}
           </span>
-          <span className="font-mono text-[10px] tracking-[0.15em] text-muted-foreground">
-            {p.period}
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[10px] tracking-[0.15em] text-muted-foreground">
+              {p.period}
+            </span>
+            <span
+              className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider"
+              style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+              {p.statusBadge}
+            </span>
+          </div>
         </div>
-        <ArrowUpRight
-          size={20}
-          className="text-muted-foreground transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent"
-        />
+        <a
+          href={p.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Open repository for ${p.name}`}
+          className="grid h-9 w-9 place-items-center rounded-lg border border-border text-muted-foreground transition-all duration-300 hover:border-accent hover:text-accent hover:scale-105"
+        >
+          <ArrowUpRight size={18} />
+        </a>
       </div>
 
+      {/* Project Image Showcase Window */}
       <div
-        className="relative mt-20 transition-transform duration-500 ease-out"
+        className="relative mt-8 overflow-hidden rounded-xl border border-border/80 bg-background/90 shadow-lg transition-all duration-500 group-hover:border-accent/60"
+        style={{ transform: "translateZ(40px)" }}
+      >
+        {/* Terminal Chrome Bar */}
+        <div className="flex items-center justify-between border-b border-border/60 bg-muted/30 px-3.5 py-2">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500/70 inline-block" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-500/70 inline-block" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70 inline-block" />
+            <span className="ml-2 font-mono text-[10px] text-muted-foreground truncate max-w-[180px]">
+              {p.systemFile}
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={onOpenLightbox}
+            className="flex items-center gap-1 rounded px-2 py-0.5 font-mono text-[10px] text-muted-foreground transition-colors hover:bg-surface-2 hover:text-accent cursor-pointer"
+          >
+            <Maximize2 size={11} />
+            <span className="hidden sm:inline">Inspect</span>
+          </button>
+        </div>
+
+        {/* Screenshot Image Container */}
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={onOpenLightbox}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") onOpenLightbox();
+          }}
+          className="relative aspect-video w-full cursor-pointer overflow-hidden group/img focus:outline-none bg-black/40"
+        >
+          <img
+            src={p.image}
+            alt={`${p.name} interface screenshot`}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
+          />
+          {/* Subtle gradient overlay */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-60 transition-opacity group-hover/img:opacity-30" />
+
+          {/* Hover inspect badge */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover/img:opacity-100 bg-background/40">
+            <span
+              className="flex items-center gap-2 rounded-full border px-4 py-2 font-mono text-xs font-semibold shadow-xl backdrop-blur-md"
+              style={{
+                borderColor: "var(--accent)",
+                color: "var(--accent)",
+                background: "color-mix(in oklab, var(--background) 85%, transparent)",
+              }}
+            >
+              <Eye size={14} />
+              <span>Inspect Interface Screenshot</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Highlights Bar */}
+      <div
+        className="relative mt-4 flex flex-wrap gap-1.5"
+        style={{ transform: "translateZ(35px)" }}
+      >
+        {p.highlights.map((h) => (
+          <span
+            key={h}
+            className="rounded border border-border/70 bg-surface-1/60 px-2 py-0.5 font-mono text-[9px] text-muted-foreground uppercase tracking-wider"
+          >
+            {h}
+          </span>
+        ))}
+      </div>
+
+      {/* Project Details */}
+      <div
+        className="relative mt-8 transition-transform duration-500 ease-out"
         style={{ transform: "translateZ(50px)" }}
       >
-        <h3 className="font-display text-5xl font-bold leading-none tracking-tight md:text-7xl">
-          {p.name}
-        </h3>
-        <p className="mt-6 max-w-md text-sm text-muted-foreground md:text-base">
+        <a
+          href={p.href}
+          target="_blank"
+          rel="noreferrer"
+          className="group/title inline-flex items-center gap-3 transition-colors hover:text-accent"
+        >
+          <h3 className="font-display text-4xl font-bold leading-none tracking-tight md:text-5xl">
+            {p.name}
+          </h3>
+          <ArrowUpRight
+            size={22}
+            className="text-muted-foreground opacity-0 transition-all duration-300 group-hover/title:opacity-100 group-hover/title:-translate-y-1 group-hover/title:translate-x-1 group-hover/title:text-accent"
+          />
+        </a>
+        <p className="mt-4 max-w-xl text-sm text-muted-foreground md:text-base leading-relaxed">
           {p.desc}
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
@@ -1997,20 +1934,169 @@ function ProjectCard({ p, i }: { p: (typeof PROJECTS)[number]; i: number }) {
         className="absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-700 ease-out group-hover:w-full"
         style={{ background: "var(--accent)" }}
       />
-    </motion.a>
+    </motion.div>
   );
 }
 
 function Work() {
+  const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [gallerySelected, setGallerySelected] = useState<number>(0);
+
+  const categories = ["All", "Cybersecurity", "Android & Safety", "AI & Automation"];
+
+  const displayedProjects =
+    activeFilter === "All"
+      ? PROJECTS
+      : PROJECTS.filter((p) =>
+          Array.isArray(p.category)
+            ? p.category.includes(activeFilter)
+            : p.category === activeFilter,
+        );
+
+  const currentProject =
+    displayedProjects[gallerySelected] || displayedProjects[0] || PROJECTS[0];
+  const currentGlobalIndex = PROJECTS.findIndex(
+    (p) => p.name === currentProject.name,
+  );
+
   return (
     <section id="work" className="relative px-6 py-32 md:px-10">
       <div className="mx-auto max-w-[1600px]">
-        <SectionLabel number="02" title="Featured Work" />
+        {/* Header with Title and Category Filter Chips */}
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-8">
+          <SectionLabel number="02" title="Featured Work & Systems" />
 
-        <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
-          {PROJECTS.map((p, i) => (
-            <ProjectCard key={p.name} p={p} i={i} />
-          ))}
+          {/* Category Filter Chips */}
+          <div className="flex flex-wrap gap-1.5">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => {
+                  setActiveFilter(cat);
+                  setGallerySelected(0);
+                }}
+                className={`rounded-lg border px-3 py-1.5 font-mono text-xs transition-colors cursor-pointer ${
+                  activeFilter === cat
+                    ? "border-accent bg-accent/10 text-accent font-semibold"
+                    : "border-border text-muted-foreground hover:border-border/80 hover:text-foreground"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Interface Showcase Only */}
+        <div className="rounded-2xl border border-border bg-card overflow-hidden p-6 md:p-10 shadow-2xl">
+          {/* Featured Active Viewer */}
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.6fr_1fr] items-center">
+            <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-border bg-black shadow-2xl">
+              <img
+                src={currentProject.image}
+                alt={`${currentProject.name} interface`}
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+              <div className="absolute top-4 left-4 flex items-center gap-2">
+                <span
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider backdrop-blur-md bg-background/80"
+                  style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                  {currentProject.statusBadge}
+                </span>
+              </div>
+            </div>
+
+            {/* Selected Project Specs */}
+            <div className="flex flex-col justify-between">
+              <div>
+                <div className="font-mono text-xs text-accent uppercase tracking-widest">
+                  0{currentGlobalIndex + 1} — {currentProject.tag}
+                </div>
+                <h3 className="mt-2 font-display text-4xl font-bold tracking-tight md:text-5xl">
+                  {currentProject.name}
+                </h3>
+                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                  {currentProject.desc}
+                </p>
+
+                <div className="mt-6">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                    Architecture & Capabilities
+                  </span>
+                  <div className="mt-2.5 flex flex-wrap gap-2">
+                    {currentProject.highlights.map((h) => (
+                      <div
+                        key={h}
+                        className="flex items-center gap-1.5 rounded-lg border border-border bg-surface-1 px-3 py-1 font-mono text-xs"
+                      >
+                        <CheckCircle2 size={12} className="text-accent" />
+                        <span>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-1.5">
+                  {currentProject.stack.map((s) => (
+                    <span
+                      key={s}
+                      className="rounded border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center gap-3">
+                <a
+                  href={currentProject.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 rounded-xl px-5 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-background transition-opacity hover:opacity-90"
+                  style={{ background: "var(--accent)" }}
+                >
+                  <Github size={15} />
+                  <span>View Repository</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Thumbnail Navigation Strip */}
+          <div className="mt-10 border-t border-border pt-6">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              All Project Systems & Interfaces ({displayedProjects.length})
+            </span>
+            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
+              {displayedProjects.map((proj, idx) => (
+                <button
+                  key={proj.name}
+                  type="button"
+                  onClick={() => setGallerySelected(idx)}
+                  className={`group relative aspect-video overflow-hidden rounded-lg border transition-all cursor-pointer ${
+                    currentProject.name === proj.name
+                      ? "border-accent ring-2 ring-accent/30 scale-102"
+                      : "border-border/80 opacity-70 hover:opacity-100"
+                  }`}
+                >
+                  <img
+                    src={proj.image}
+                    alt={proj.name}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
+                  <span className="absolute bottom-1 left-1.5 font-mono text-[9px] font-semibold text-white drop-shadow">
+                    {proj.name}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2022,32 +2108,27 @@ function Work() {
 
 const RESEARCH = [
   {
-    name: "S.H.I.E.L.D / SecureVault Architecture",
+    name: "Zero-Trust Physical Handovers (Paper ID: 309)",
     status: "ICCCIoT 2026",
-    desc: "Research paper presentation at ICCCIoT 2026, Sri Sairam Engineering College — introducing a privacy-preserving Android cybersecurity framework that addresses the Trusted Handover Problem via delegated access control, cryptographic vault design (SecureVault), and tamper-evident audit logging.",
-  },
-  {
-    name: "Modus Mapping — Threat Modeling",
-    status: "Award Winning",
-    desc: "A proactive threat mapping and risk evaluation engine awarded Best Innovative Idea at HACKZILLA 2k25 (KPRIET) and State Rounds Finalist at BitNBuild’25 (GDSC CRCE).",
+    desc: "Co-authored and presented research on 'Zero-Trust Physical Handovers: A Low-Latency Android DPC Framework for Mitigating Unintended Data Exposure' at ICCCIoT 2026 (Sri Sairam Engineering College, Chennai, Sept 2026). Explores unrooted Android DPC isolation, USB restrictions, and TEE-backed cryptographic key management during temporary handovers.",
   },
 ];
 
 const ONGOING = [
   {
-    name: "A.E.G.I.S",
+    name: "S.H.I.E.L.D",
     status: "Active Dev",
-    desc: "Adaptive Emergency Geolocation & Integrated Safety — personal safety companion featuring live geolocation, safe zone monitoring, SOS workflows, and offline-capable low bandwidth synchronization.",
-  },
-  {
-    name: "S.H.I.E.L.D (SecureVault)",
-    status: "Active Dev",
-    desc: "Secure Handover Integrity, Evidence, Logging and Delegation — privacy-preserving Android cybersecurity framework with tamper-evident vault design solving the smartphone repair handover risk.",
+    desc: "Secure Handover Integrity, Evidence, Logging and Delegation — unrooted Android DPC security framework with application isolation, USB restrictions, TEE cryptographic key management, and emergency lockdown.",
   },
   {
     name: "LandGuard AI",
     status: "Active Dev",
-    desc: "Intelligent early-warning platform combining IoT sensor telemetry, computer vision/ML classification, and real-time community alerts for perimeter defense and conflict mitigation.",
+    desc: "AI-powered landslide risk monitoring and early-warning platform using satellite imagery, rainfall, terrain, and soil data with an interactive React-Leaflet GIS dashboard.",
+  },
+  {
+    name: "A.E.G.I.S",
+    status: "Active Dev",
+    desc: "Adaptive Emergency Geolocation & Integrated Safety — personal safety companion featuring live geolocation, safe zone monitoring, SOS workflows, and offline-capable low bandwidth synchronization.",
   },
 ];
 
@@ -2069,7 +2150,7 @@ const CERTIFICATIONS = [
   },
   {
     venue: "ICCCIoT 2026 · Sri Sairam Engineering College",
-    title: "Research Paper Presentation — S.H.I.E.L.D",
+    title: "Paper ID 309: Zero-Trust Physical Handovers (Android DPC Framework)",
     year: "2026",
   },
   {
@@ -2133,7 +2214,7 @@ function Research() {
     <Scroll3DSection id="research">
       <SectionLabel number="03" title="Research" />
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 max-w-4xl">
         {RESEARCH.map((r, i) => (
           <ResearchCard key={r.name} item={r} i={i} />
         ))}
@@ -2204,7 +2285,7 @@ const TIMELINE = [
   {
     year: "2022",
     items: [
-      "Started Integrated M.Tech in CSE at Erode Sengunthar Engineering College (CGPA: 8.09, 8th Sem)",
+      "Started Integrated M.Tech in CSE at Erode Sengunthar Engineering College (CGPA: 8.09 up to 8th Semester)",
     ],
   },
   {
@@ -2217,20 +2298,20 @@ const TIMELINE = [
     year: "2025",
     items: [
       "SOC-X — Security Operation Center Extreme (Jul 2025 — Aug 2025)",
-      "PUP — Pentest Unified Platform (Oct 2025 — Dec 2025)",
-      "LandGuard AI — Perimeter Defense & Early Warning Platform",
-      "Cybersecurity — Infosys Springboard Certification",
+      "Modus Mapping — Intelligent Crime Pattern Analysis Platform (Sep 2025)",
       "HACKZILLA 2k25 Hackathon (KPRIET) — Best Innovative Idea Award (Modus Mapping)",
       "BitNBuild’25 Hackathon (State Rounds, GDSC CRCE) — Finalist (Modus Mapping)",
+      "Cybersecurity — Infosys Springboard Certification",
     ],
   },
   {
     year: "2026",
     items: [
-      "A.E.G.I.S — Adaptive Emergency Geolocation & Integrated Safety (Aug 2026 — Present)",
-      "S.H.I.E.L.D / SecureVault — Secure Handover Android Framework (Jun 2026 — Present)",
+      "SOC Intern — TriosCyber (Virtual, Sep 2026 — Oct 2026) · Wazuh, Splunk & MITRE ATT&CK",
+      "ICCCIoT 2026 (Sri Sairam Engineering College) — Paper ID 309: Zero-Trust Physical Handovers (Android DPC)",
+      "S.H.I.E.L.D — Secure Handover Integrity, Evidence, Logging and Delegation (Jun 2026 — Present)",
+      "LandGuard AI — AI-Powered Landslide Risk Monitoring & Early-Warning (Sep 2026 — Present)",
       "F.A.S.A — File Automation and Security Assistance (Feb 2026 — Apr 2026)",
-      "ICCCIoT 2026, Sri Sairam Engineering College — Research Paper Presentation (S.H.I.E.L.D / SecureVault)",
       "VYASA 2K26 Inter College Event (ESEC) — 2nd Prize Winner",
       "Google & Coursera — Cybersecurity Professional Certification (In Progress)",
     ],
@@ -2327,9 +2408,9 @@ function Journey() {
 /* -------------------- STATS -------------------- */
 
 const STATS = [
-  { n: 6, suffix: "", label: "Flagship Projects" },
+  { n: 6, suffix: "", label: "Projects" },
   { n: 3, suffix: "", label: "Certifications" },
-  { n: 4, suffix: "", label: "Awards & Honors" },
+  { n: 5, suffix: "", label: "Hackathons" },
   { n: 8.09, suffix: "", label: "CGPA · M.Tech CSE (8th Sem)" },
   { n: 2027, suffix: "", label: "Graduation Year" },
 ];
@@ -2432,7 +2513,6 @@ function Contact() {
               { label: "WhatsApp", icon: Phone, href: CONTACT.whatsapp, external: true },
               { label: "GitHub", icon: Github, href: CONTACT.github, external: true },
               { label: "LinkedIn", icon: Linkedin, href: CONTACT.linkedin, external: true },
-              { label: "Portfolio", icon: ExternalLink, href: CONTACT.portfolio, external: true },
               { label: "Resume", icon: Download, href: CONTACT.resume, external: false },
             ].map((b) => (
               <a
@@ -2504,26 +2584,27 @@ type Logo = { name: string; slug: string; darkInvert?: boolean };
 const STACK_ROW_1: Logo[] = [
   { name: "Linux", slug: "linux" },
   { name: "Python", slug: "python" },
-  { name: "Android Studio", slug: "androidstudio" },
+  { name: "Splunk", slug: "splunk" },
   { name: "Wireshark", slug: "wireshark" },
   { name: "Nmap", slug: "nmap", darkInvert: true },
   { name: "Burp Suite", slug: "burpsuite" },
   { name: "Metasploit", slug: "metasploit" },
-  { name: "OWASP", slug: "owasp" },
+  { name: "Android Studio", slug: "androidstudio" },
   { name: "Git", slug: "git" },
   { name: "GitHub", slug: "github", darkInvert: true },
 ];
 
 const STACK_ROW_2: Logo[] = [
   { name: "Windows", slug: "windows11" },
-  { name: "Flask", slug: "flask", darkInvert: true },
   { name: "React", slug: "react" },
   { name: "TypeScript", slug: "typescript" },
+  { name: "Node.js", slug: "nodedotjs" },
+  { name: "Express", slug: "express", darkInvert: true },
+  { name: "MongoDB", slug: "mongodb" },
+  { name: "Supabase", slug: "supabase" },
+  { name: "SQLite", slug: "sqlite" },
   { name: "Tailwind CSS", slug: "tailwindcss" },
-  { name: "PostgreSQL", slug: "postgresql" },
-  { name: "Firebase", slug: "firebase" },
-  { name: "Docker", slug: "docker" },
-  { name: "Figma", slug: "figma" },
+  { name: "Vite", slug: "vite" },
 ];
 
 type ActiveLogoCtx = {
