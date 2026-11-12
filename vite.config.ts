@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
@@ -8,8 +8,29 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+function devStylesMimeFix(): Plugin {
+  return {
+    name: "dev-styles-mime-fix",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (
+          req.url &&
+          req.url.startsWith("/src/styles.css") &&
+          !req.url.includes("?direct") &&
+          !req.url.includes("?import") &&
+          !req.url.includes("?html-proxy")
+        ) {
+          req.url = req.url.includes("?") ? `${req.url}&direct` : `${req.url}?direct`;
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
+    devStylesMimeFix(),
     tailwindcss(),
     tanstackStart({
       server: { entry: "server" },
@@ -49,7 +70,7 @@ export default defineConfig({
     ignoreOutdatedRequests: true,
   },
   server: {
-    host: "::",
+    host: true,
     port: 8080,
   },
 });
